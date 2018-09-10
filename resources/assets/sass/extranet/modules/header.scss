@@ -1,0 +1,150 @@
+@import '../_variables';
+
+$header-height: 70px;
+
+header {
+  width: 100%;
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  justify-content: space-between;
+
+  > div.header-container {
+    width: 1080px;
+    margin: 0 auto;
+
+    > div.cselect.lang {
+      float: right;
+      line-height: 40px;
+      height: 40px;
+      margin: 15px 25px;
+      width: 120px;
+      color: #304090;
+      font-size: 14px;
+
+      label {
+        padding-left: 10px;
+      }
+
+      .menu {
+        padding: 10px;
+        border: 1px solid #f0f0f0;
+        margin-left: -1px;
+        margin-top: 15px;
+
+        a {
+          line-height: 40px;
+        }
+      }
+
+      i {
+        line-height: 44px;
+        font-size: 11px;
+      }
+    }
+
+    a.logo {
+      display: block;
+      width: 114px;
+      background: #{cdn('/img/logo.png')} center center no-repeat;
+      height: 30px;
+      background-size: cover;
+      margin: #{($header-height - 30px) / 2} 0;
+      float: left;
+    }
+
+    > div {
+      display: flex;
+      height: 100%;
+      float: right;
+
+      > div {
+        line-height: $header-height;
+        cursor: pointer;
+        color: $roomp-color;
+      }
+
+      > a {
+        line-height: $header-height;
+        height: $header-height;
+        margin-right: 20px;
+        cursor: pointer;
+        color: $roomp-color;
+        text-decoration: none;
+      }
+
+      > .router-link-active {
+        border-bottom: 5px solid $roomp-color;
+      }
+
+      $header-menu-width: 200px;
+
+      .header-menu {
+        position: relative;
+        float: left;
+        width: $header-menu-width;
+        height: 100%;
+
+
+        &, * {
+          user-select: none;
+        }
+
+        > span {
+          width: 100%;
+          float: left;
+          text-align: center;
+          font-weight: bolder;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          padding: 0 5px;
+        }
+
+        > div {
+          position: absolute;
+          width: 100%;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          border-radius: 3px;
+          top: 100%;
+          left: 0;
+          z-index: 255;
+
+          > div {
+            height: 40px;
+            line-height: 40px;
+            border-top: 1px solid $grey;
+            text-align: center;
+          }
+
+          > a {
+            font-size: 12px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid $grey;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: $roomp-color;
+            padding: 0 5px;
+
+            width: 100%;
+
+            &:not(:last-child) {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+
+      i {
+        font-size: 16px;
+      }
+    }
+  }
+}

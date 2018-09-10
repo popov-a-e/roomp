@@ -1,0 +1,65 @@
+@import '../modules/header';
+@import '../modules/footer';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  max-width: 1600px;
+  margin-top: $roomp-header-height;
+
+  padding: 0 20px 20px 20px;
+
+  .content {
+    width: 1000px;
+    position: relative;
+
+    margin: 0 auto;
+    padding-bottom: 20px;
+
+    h1, h2 {
+      text-align: center;
+      text-transform: uppercase;
+      height: 50px;
+      width: 100%;
+      float: left;
+      position: relative;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 50px;
+      padding: 0;
+      color: $roomp-color;
+      margin: 0 0 20px 0;
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 20px;
+      margin: 20px 0 10px 0;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    ul, ol, li {
+      float: left;
+    }
+  }
+}

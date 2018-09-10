@@ -1,0 +1,68 @@
+@import './_variables';
+
+.login {
+  width: 450px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+
+  h4 {
+    border-bottom: 1px solid $grey;
+    height: 90px;
+    font-weight: bold;
+    color: $roomp-color;
+    line-height: 90px;
+    text-align: center;
+    margin: 0px 0px;
+    font-size: 20px;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    padding: 0px 60px;
+
+    label {
+      color: $roomp-color;
+    }
+
+    input {
+      border: 1px solid $grey;
+      height: 50px;
+      margin-top: 25px;
+      text-align: center;
+      border-radius: 3px;
+    }
+
+    .error {
+      color: red;
+    }
+  }
+
+  button {
+    width: 240px;
+    height: 50px;
+    background-color: $roomp-color;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 3px;
+    border-style: none;
+    cursor: pointer;
+  }
+  .reset-password {
+    margin: 0 auto;
+    color: $roomp-color;
+    cursor: pointer;
+
+  }
+}

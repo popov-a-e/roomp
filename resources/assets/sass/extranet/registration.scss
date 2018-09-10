@@ -1,0 +1,135 @@
+@import './_variables';
+/*@import './index';*/
+/*@import './photos';
+@import './room';
+@import './settings'; */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #eaeaea;
+
+  $header-height: 70px;
+
+  > .header-container {
+    width: 100%;
+    height: $header-height;
+    display: block;
+    float: left;
+    background: white;
+    flex: 0 1 $header-height;
+
+    header {
+      width: 1440px;
+      margin: 0 auto;
+      height: $header-height;
+      display: block;
+
+      @include noprint;
+
+      img {
+        height: 30px;
+        margin: ($header-height - 30px) / 2;
+        float: left;
+      }
+    }
+  }
+
+  > .content {
+    flex: 1;
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > div.registration {
+      background: white;
+      width: 500px;
+
+      h1 {
+        width: 100%;
+        line-height: 90px;
+        border-bottom: 1px solid $grey;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        float: left;
+        display: block;
+        color: $roomp-color;
+      }
+
+      > div {
+        padding: 40px 60px 60px 60px;
+
+        &, > * {
+          float: left;
+          clear: both;
+          display: block;
+          width: 100%;
+        }
+
+        > input {
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          border: 1px solid #D8D8D8;
+          border-radius: 3px;
+          text-align: center;
+        }
+
+        label {
+          margin: 0 0 20px 0;
+          padding: 0;
+          text-align: center;
+        }
+
+        > button {
+          @include common_button;
+          width: 100%;
+          line-height: 50px;
+          height: 50px;
+          border-radius: 3px;
+
+          &[disabled]:not(.loading), &[disabled]:not(.loading):hover {
+            background-color: gray;
+            border-color: gray;
+            cursor: default;
+          }
+
+          i {
+            font-size: 22px;
+            line-height: 50px;
+          }
+        }
+
+        > div.errors {
+          color: red;
+          text-align: center;
+          width: 100%;
+          height: 25px;
+          line-height: 25px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+

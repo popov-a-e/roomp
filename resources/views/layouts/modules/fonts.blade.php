@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="{{ cdn('/css/fonts.css') }}"/>

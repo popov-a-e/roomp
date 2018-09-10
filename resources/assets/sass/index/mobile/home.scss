@@ -1,0 +1,124 @@
+@import './modules/header';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  padding: $header-height $margin-small $margin-small;
+
+  .content {
+    float: left;
+    width: 100%;
+    background-size: cover;
+    background-image: #{cdn('/img/bg-mobile.jpg')};
+    background-position: center top;
+    position: relative;
+    z-index: 1;
+
+    @include image_overlay;
+
+    .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      height: calc(100% - 140px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 40px;
+
+      h1, h2 {
+        padding: 0;
+        margin: 0;
+        color: white;
+        text-shadow: 2px 2px 4px #777777;
+      }
+
+      h1 {
+        font-size: 26px;
+        margin-top: 36px;
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-weight: 400;
+        font-size: 20px;
+      }
+    }
+
+    .form {
+      position: absolute;
+      bottom: 0;
+      height: 160px;
+      width: 100%;
+      left: 0;
+      padding: $margin $margin 0;
+
+      > .cselect {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        position: relative;
+        background: white;
+        display: block;
+
+        i {
+          position: absolute;
+          right: $margin-small;
+          top: 0;
+          height: 50px;
+          line-height: 56px;
+          font-size: 14px;
+        }
+
+        span {
+          display: block;
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          position: relative;
+          font-size: 15px;
+          padding: 0 $margin-small;
+        }
+
+        select {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0;
+
+          option[disabled] {
+            display: none;
+          }
+        }
+      }
+
+      > a {
+        float: left;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        margin: $margin 0 0;
+        text-align: center;
+        font-size: 15px;
+        text-decoration: none;
+
+        @include common_button;
+      }
+    }
+  }
+}

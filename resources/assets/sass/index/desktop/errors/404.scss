@@ -1,0 +1,319 @@
+@import './../modules/header';
+@import './../modules/footer';
+@import './../modules/overlay-promo';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  max-width: none;
+}
+
+footer {
+  position: absolute;
+  top: 100%;
+  transition: all .3s ease;
+  left: 0;
+
+}
+
+main {
+  width: 100%;
+  position: relative;
+  margin-top: $roomp-header-height;
+  padding: 0 20px 20px 20px;
+  height: calc(100vh - 60px);
+
+  .content {
+    width: 100%;
+    float: left;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    .background {
+      background-size: cover;
+      background-image: #{cdn('/img/404.jpg')};
+      background-position: center center;
+
+      @include image_overlay;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: calc(100vh - 60px);
+
+    }
+
+    .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      height: calc(50% - 35px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h1, h2 {
+        padding: 0;
+        margin: 0;
+        color: white;
+      }
+
+      h1 {
+        font-size: 42px;
+        margin-top: 36px;
+
+        span {
+          font-size: 50px;
+          font-weight: bold;
+        }
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-weight: 400;
+        font-size: 30px;
+        width: 800px;
+
+        a {
+          color: white;
+        }
+      }
+    }
+
+    .form {
+      top: 0;
+      background: white;
+      z-index: 8;
+      height: 70px;
+      border: none;
+      margin: 0;
+      padding: 0;
+      width: auto;
+
+      .white-overlay {
+        padding: 10px 0 10px 0;
+        float: left;
+        display: flex;
+
+        & > * {
+          float: left;
+          position: relative;
+        }
+
+        .dates {
+          flex: 1 0 auto;
+          padding: 0 20px;
+          float: left;
+
+          a {
+            font-size: 14px;
+            text-decoration: none;
+            color: black;
+          }
+
+          .arrow {
+            line-height: 30px;
+            padding: 0 10px;
+          }
+        }
+
+        .cselect {
+          padding-right: 10px;
+          font-size: 14px;
+
+          &.cities {
+            border-right: 1px solid #ebebeb;
+            flex: 0 1 200px;
+            min-width: 300px;
+
+            label {
+              padding-left: 20px;
+
+              i {
+                margin-right: 10px;
+              }
+            }
+
+            .menu {
+              margin-left: 0;
+            }
+          }
+
+          &.guests, &.rooms {
+            border-left: 1px solid #ebebeb;
+          }
+        }
+      }
+
+      .cselect {
+        height: 50px;
+        line-height: 50px;
+        min-width: 140px;
+
+        i {
+          line-height: 50px;
+        }
+      }
+
+      .dates-form {
+        display: flex;
+        float: left;
+        width: auto;
+        height: 50px;
+        padding: 5px;
+        min-width: 400px;
+        justify-content: center;
+        align-items: center;
+
+        .from, .till {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-content: center;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+
+          &:hover a {
+            text-decoration: underline;
+          }
+        }
+
+        .from {
+          border-right: 1px solid $booking-alternate;
+          left: 0;
+        }
+
+        .till {
+          left: 50%;
+        }
+
+        a {
+          font-size: 14px;
+          text-decoration: none;
+
+          &.date {
+            color: $roomp-color;
+          }
+
+          &.day {
+            color: $booking-color;
+          }
+        }
+
+        span.nights {
+          background-color: white;
+          font-size: 14px;
+          line-height: 16px;
+          color: $booking-color;
+          cursor: pointer;
+          z-index: 100;
+        }
+      }
+
+      > button {
+        @include common_button;
+        height: 70px;
+        padding: 0 70px;
+        font-size: 14px;
+        cursor: pointer;
+        float: left;
+        width: auto;
+        margin: 0;
+      }
+    }
+
+    .conveniences {
+      position: absolute;
+      width: 100%;
+      bottom: 3 * 20px;
+      display: flex;
+      color: white;
+      flex-direction: column;
+      left: 0;
+
+      h3 {
+        text-align: center;
+        font-weight: 400;
+      }
+
+      .conveniences-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        > div {
+          text-align: center;
+          width: 220px;
+          margin: 0 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-content: center;
+
+
+          p {
+            margin: 0;
+            width: 100px;
+            display: block;
+            align-self: center;
+          }
+
+          i {
+            font-size: 26px;
+          }
+        }
+      }
+    }
+
+  }
+
+  .cselect {
+    font-size: 14px;
+
+    label {
+      padding-left: 20px;
+      font-size: inherit;
+
+      i {
+        font-size: 12px;
+      }
+    }
+
+    .menu {
+      padding: 10px;
+      border: 1px solid #f0f0f0;
+      margin-left: -1px;
+      margin-top: 10px;
+
+      a {
+        padding: 10px;
+        line-height: normal;
+        font-size: inherit;
+      }
+    }
+  }
+
+}

@@ -9,6 +9,14 @@ return [
   'timezone' => 'UTC',
 
   'locale' => 'en',
+  'locales' => ['ru', 'en'],
+  'currencies' => ['RUB', 'USD', 'GEL'],
+  'currencies_patterns' => [
+    'RUB' => ":n₽",
+    'USD' => "$:n",
+    'GEL' => ":n₾ ",
+    'EUR' => "€:n"
+  ],
   'fallback_locale' => 'en',
 
   'key' => env('APP_KEY'),
@@ -51,10 +59,13 @@ return [
      * Application Service Providers...
      */
     Roomp\Providers\AppServiceProvider::class,
+    Roomp\Providers\ViewServiceProvider::class,
+    Roomp\Providers\BladeDirectiveServiceProvider::class,
     Roomp\Providers\AuthServiceProvider::class,
     // Roomp\Providers\BroadcastServiceProvider::class,
     Roomp\Providers\EventServiceProvider::class,
     Roomp\Providers\RouteServiceProvider::class,
+    Roomp\Providers\CollectionExtansionsServiceProvider::class,
 
   ],
 
@@ -93,6 +104,12 @@ return [
     'URL' => Illuminate\Support\Facades\URL::class,
     'Validator' => Illuminate\Support\Facades\Validator::class,
     'View' => Illuminate\Support\Facades\View::class,
+
+    'Availability' => Roomp\Facades\Availability::class,
+    'Price' => Roomp\Facades\Price::class,
+    'ChannelPrice' => Roomp\Facades\ChannelPrice::class,
+    'Restriction' => Roomp\Facades\Restriction::class,
+
   ],
 
 ];

@@ -15,9 +15,14 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Roomp\Http\Middleware\Admin\AdminLocaleMiddleware;
 use Roomp\Http\Middleware\CheckForMaintenanceMode;
+use Roomp\Http\Middleware\DeviceDetector;
 use Roomp\Http\Middleware\EncryptCookies;
 use Roomp\Http\Middleware\RedirectIfAuthenticated;
+use Roomp\Http\Middleware\SetPreferredCurrency;
+use Roomp\Http\Middleware\SetPreferredLocale;
+use Roomp\Http\Middleware\ShareUser;
 use Roomp\Http\Middleware\TrimStrings;
 use Roomp\Http\Middleware\TrustProxies;
 use Roomp\Http\Middleware\VerifyCsrfToken;
@@ -40,6 +45,17 @@ class Kernel extends HttpKernel {
       ShareErrorsFromSession::class,
       VerifyCsrfToken::class,
       SubstituteBindings::class,
+      SetPreferredLocale::class,
+      SetPreferredCurrency::class,
+      DeviceDetector::class
+    ],
+
+    'admin' => [
+      AdminLocaleMiddleware::class,
+    ],
+
+    'extranet' => [
+
     ],
 
     'api' => [
@@ -57,5 +73,6 @@ class Kernel extends HttpKernel {
     'guest' => RedirectIfAuthenticated::class,
     'signed' => ValidateSignature::class,
     'throttle' => ThrottleRequests::class,
+    'share.user' => ShareUser::class
   ];
 }

@@ -1,0 +1,28 @@
+@import '../_variables';
+
+
+header {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: $admin-header-height;
+  background: white;
+
+  a.logo {
+    width: $admin-sidebar-width;
+    height: 100%;
+    float: left;
+    background: #{cdn('/img/logo.png')} center center no-repeat;
+    background-size: 57%;
+  }
+
+  a.user {
+    line-height: $admin-header-height;
+    width: 250px;
+    text-align: center;
+    float: right;
+    text-decoration: none;
+    color: $roomp-color;
+    border-left: 1px solid $admin-color;
+  }
+}

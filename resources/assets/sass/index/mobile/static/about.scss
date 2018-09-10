@@ -1,0 +1,85 @@
+@import '../modules/header';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  padding: $header-height $margin-small $margin-small;
+
+  .content {
+    flex: 1;
+  }
+
+  .content {
+    width: 100%;
+    position: relative;
+
+    nav {
+      float: left;
+      position: relative;
+      width: 100%;
+      background: white;
+      margin: 0;
+
+      a {
+        float: left;
+        width: calc(50% - 5px);
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 0 0 10px;
+        background: #eaeaea;
+        white-space: nowrap;
+        overflow: hidden;
+        text-decoration: none;
+        color: $roomp-color;
+        font-size: 14px;
+
+        &:not(:first-child) {
+          margin-left: 10px;
+        }
+
+        &:hover {
+          background-color: #c6c6c6;
+        }
+
+        &.router-link-exact-active {
+          background-color: #c6c6c6;
+        }
+      }
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 20px;
+      color: $roomp-color;
+      line-height: 50px;
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    & > div {
+      position: relative;
+      width: 100%;
+      left: 0;
+      margin: 0;
+      float: left;
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+@import './_variables';
+@import './modules/header';
+@import './modules/footer';
+@import './booking';
+@import './organization';
+@import 'dashboard';
+@import 'dashboard-editor';
+@import './finance';
+@import './reconciliation';
+@import './booking_confirmation';
+
+
+div.filter {
+  &.filter_select, &.filter_text {
+    display: flex;
+
+    button.inactive {
+      display: none;
+    }
+
+    &:hover {
+      button.inactive {
+        display: block;
+      }
+    }
+  }
+
+  input {
+    height: 100%;
+    border: none;
+    width: calc(100% - 30px);
+
+    &.bordered {
+      border: 1px solid rgb(160, 160, 160);
+    }
+
+    &[disabled] {
+      border: 1px solid rgba(0,0,0,0);
+      background: none;
+    }
+  }
+
+  button {
+    width: 30px;
+  }
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+main {
+  width: 100%;
+  //width: 1440px;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  > header {
+    flex: 0 1 70px;
+  }
+
+  > div {
+    flex: 1;
+  }
+
+  > footer {
+    flex: 0 1 120px;
+  }
+  //float: left;
+
+  padding: 0;
+  margin: auto;
+  background-color: $grey;
+
+  .selection-window {
+    position: absolute;
+    background-color: #5ab4c5;
+    opacity: 0.5;
+  }
+
+  > div {
+   // min-height: 760px;
+  }
+}
+
+.content {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: calc(100% - #{0});
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+

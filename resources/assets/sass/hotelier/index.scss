@@ -1,0 +1,52 @@
+@import './_variables';
+@import './modules/header';
+@import './modules/footer';
+/*@import './booking';
+@import './calendar';
+@import './finance';
+@import './index';*/
+@import './offer';
+@import './login';
+
+/*
+@import './organization';
+@import './photos';
+@import './room';
+@import './settings'; */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: $grey;
+
+}
+
+.content {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: calc(100% - #{$hotelier-header-height});
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: $hotelier-color;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

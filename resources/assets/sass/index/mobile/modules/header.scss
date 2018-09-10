@@ -1,0 +1,540 @@
+@import '../../../_variables';
+
+$header-height: 50px;
+$button-size: 30px;
+$margin-small: 10px;
+$margin: 20px;
+
+* {
+  cursor: default !important;
+}
+
+@mixin close-button {
+  border: none;
+  min-width: 0;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 20px;
+  line-height: 30px;
+  color: black;
+  top: 20px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+body.fixed {
+  overflow: hidden !important;
+  height: 80vh !important;
+
+  main {
+    overflow:hidden;
+    height: 80vh;
+  }
+}
+
+header {
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  padding: $margin-small $margin 0;
+  width: 100%;
+  z-index: 2000;
+  background: white;
+
+  a.logo {
+    background: #{cdn('/img/logo.png')} center no-repeat;
+    width: 100px;
+    height: $button-size;
+    margin-top: 3px;
+    float: left;
+    background-size: contain;
+    display: block;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .transition {
+    flex: 1;
+  }
+
+  > a.phone, > button.menu {
+    width: $button-size;
+    height: $button-size;
+    font-size: 25px;
+    line-height: 42px;
+    color: $roomp-color;
+    background: none;
+    border: none;
+    text-align: center;
+    outline: none;
+    overflow: hidden;
+    padding: 0;
+    margin-left: $margin-small;
+  }
+
+  a.phone {
+
+  }
+
+  button.menu {
+
+  }
+
+  >div.menu {
+    width: 100%;
+    position: absolute;
+    top: $header-height;
+    left: 0;
+    z-index: 2002;
+    background: white;
+    padding: $margin-small;
+    display:flex;
+    flex-direction: column;
+    padding-bottom: $margin;
+
+    .tabs {
+      width: 100%;
+      flex: 3;
+      display: flex;
+
+      &:not(.moving) {
+        transition: margin .3s ease;
+      }
+
+      .tab {
+        flex: 0 0 100%;
+        padding-top: 10px;
+
+        > a {
+          float: left;
+          width: 100%;
+          clear: both;
+          line-height: 40px;
+          height: 40px;
+          padding-left: $margin-small;
+          color: black;
+          font-size: 18px;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .login {
+      width: 100%;
+      flex: 4;
+      padding-top: 20px;
+      border-top: 1px solid #c1c1c1;
+
+      > a {
+        float: left;
+        width: 100%;
+        clear: both;
+        line-height: 40px;
+        height: 40px;
+        padding-left: $margin-small;
+        color: black;
+        font-size: 18px;
+        text-decoration: none;
+      }
+
+      > label {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        background: white;
+        display: block;
+        float: left;
+
+        i {
+          position: absolute;
+          right: $margin-small;
+          top: 0;
+          height: 40px;
+          line-height: 46px;
+          font-size: 14px;
+        }
+
+        span {
+          display: block;
+          width: 100%;
+          height: 40px;
+          line-height: 40px;
+          position: relative;
+          font-size: 18px;
+          padding: 0 $margin-small;
+        }
+
+        select {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0;
+        }
+      }
+    }
+
+    > .social {
+      padding-top: 20px;
+      border-top: 1px solid #c1c1c1;
+
+      span {
+        display: flex;
+        justify-content: center;
+
+        a {
+          font-size: 24px;
+          color: $roomp-color;
+          margin: 0 10px;
+        }
+      }
+    }
+
+    nav {
+      display: flex;
+      width: 100%;
+      //padding-left: calc(50% - 60px);
+
+      >div {
+        display:flex;
+
+        &:not(.moving) {
+          transition: margin .3s ease;
+        }
+
+        a {
+          display: block;
+          width: 33.33%;
+          text-align: center;
+          color: #c1c1c1;
+
+          &.selected {
+            color: $roomp-color;
+            border-bottom: 2px solid $roomp-color;
+          }
+        }
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      z-index: 2004;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: auto;
+
+      &:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      > div {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: white;
+        padding: 20px;
+        text-align: center;
+
+        button.close {
+          @include close-button;
+        }
+
+        button.confirm {
+          width: 100%;
+          background-color: $roomp-color;
+          border: none;
+          color: white;
+          height: 50px;
+          line-height: 50px;
+          margin-top: 10px;
+        }
+
+        &.login {
+          .form {
+            input:not([type=checkbox]) {
+              width: 100%;
+              position: relative;
+              float: left;
+              height: 50px;
+              line-height: 50px;
+              font-weight: 600;
+              border: none;
+              background: #f0f0f0;
+              padding-left: 20px;
+
+              margin-top: 10px;
+
+              @include placeholder {
+                font-weight: 400;
+              }
+
+              &:first-child {
+                margin-top: 0;
+              }
+            }
+
+            input[type=checkbox] {
+              float: left;
+              height: 30px;
+              line-height: 30px;
+              margin: 0 10px 0 0;
+              outline: none !important;
+              -webkit-appearance: checkbox;
+            }
+
+            label, a {
+              float: left;
+              height: 30px;
+              line-height: 30px;
+              margin-top: 10px;
+              font-size: 14px;
+              color: black;
+            }
+
+            a {
+              float: right;
+            }
+          }
+
+          p {
+            width: 100%;
+            text-align: center;
+            margin: 20px 0 0 0;
+            font-size: 14px;
+
+            a {
+              color: $roomp-color;
+            }
+          }
+        }
+
+        &.register {
+          height: auto;
+          float: left;
+
+          .form {
+            input:not([type=checkbox]) {
+              width: 100%;
+              position: relative;
+              float: left;
+              height: 50px;
+              line-height: 50px;
+              font-weight: 600;
+              border: none;
+              background: #f0f0f0;
+              padding-left: 20px;
+
+              margin-top: 10px;
+
+              @include placeholder {
+                font-weight: 400;
+              }
+
+              &:first-child {
+                margin-top: 0;
+              }
+            }
+
+            input[type=checkbox] {
+              float: left;
+              height: 30px;
+              line-height: 30px;
+              margin: 0 10px 0 0;
+              outline: none !important;
+              -webkit-appearance: checkbox;
+            }
+
+
+            > div.errors {
+              float: left;
+              position: relative;
+              width: 100%;
+              color: red;
+              font-size: 12px;
+              text-align: center;
+              margin-top: 5px;
+            }
+
+            label, a {
+              float: left;
+              height: 30px;
+              line-height: 30px;
+              margin-top: 10px;
+              font-size: 14px;
+              color: black;
+            }
+
+            a {
+              margin: 0;
+              float: right;
+            }
+          }
+
+          p {
+            width: 100%;
+            text-align: center;
+            margin: 20px 0 0 0;
+            font-size: 14px;
+
+            a {
+              color: $roomp-color;
+            }
+          }
+        }
+
+        &.verify-phone {
+          p {
+            font-size: 14px;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            line-height: 20px;
+          }
+
+          input {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding-left: 10px;
+            margin: 10px 0;
+          }
+
+          button {
+            @include normal_button;
+            @include common_button;
+            width: 100%;
+            float: left;
+            line-height: 50px;
+          }
+
+          > a {
+            margin: 10px 0 0 0;
+            line-height: 30px;
+            text-align: center;
+            font-size: 14px;
+            width: 100%;
+            float: left;
+          }
+        }
+
+        &.forgot-pass {
+          h2 {
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 400;
+          }
+
+          button {
+            @include normal_button;
+
+            float: left;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            margin: 10px 0 0 0;
+            background-color: #eaeaea;
+
+            &:hover {
+              background-color: #cecece;
+            }
+
+            &.back, &.back:hover {
+              background-color: white;
+            }
+          }
+        }
+
+        &.forgot-by-phone, &.forgot-by-email {
+          h2 {
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 400;
+          }
+
+          button {
+            @include common_button;
+
+            float: left;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            margin: 10px 0 0 0;
+
+            &.close {
+              @include close-button;
+            }
+
+            &.back, &.back:hover {
+              background-color: white;
+              color: black;
+            }
+          }
+
+          > input {
+            width: 100%;
+            float: left;
+            line-height: 50px;
+            height: 50px;
+            padding-left: 10px;
+          }
+
+          div.countryinput {
+            margin: 0 0 10px 0;
+
+            input {
+              height: 50px;
+              padding-left: 10px;
+            }
+          }
+        }
+
+        &.forgot-by-phone {
+          > div {
+            width: 100%;
+            display: flex;
+
+            input {
+              margin-right: 10px;
+              padding-left: 10px;
+            }
+
+            input {
+              flex: 2;
+            }
+
+            button {
+              flex: 1;
+              margin: 0;
+            }
+          }
+
+          .repeat, .repeat:hover {
+            background: white;
+            color: $roomp-color;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+
+}

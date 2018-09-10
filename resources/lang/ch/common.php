@@ -1,0 +1,37 @@
+<?php
+
+return [
+  'checkin' => '入住日期',
+  'checkout' => '离店日期',
+  'rooms' => ['房间数', '房间数', '房间数'],
+  'guests' => ['住客数', '住客数', '住客数'],
+  'nights' => ['天数', '天数', '天数'],
+  'adults_list' => ['1位成人', '2位成人', '3位成人'],
+  'children_list' => ['没有儿童', '1个儿童', '2个儿童'],
+  'room_list' => ['1个房间', '2个房间', '3个房间', '4个房间', '5个房间', '6个房间', '7个房间', '8个房间', '9个房间'],
+  'guest_list' => ['1位客人', '2位客人', '3位客人', '4位客人', '5位客人', '6位客人', '7位客人', '8位客人', '9位客人'],
+  'adults' => ['成人', '成人', '成人'],
+  'children' => ['有儿童', '有儿童', '有儿童', '!*无儿童'],
+  'infants' => ['婴儿', '婴儿', '婴儿'],
+  'years' => ['岁', '岁', '岁'],
+  'children_low' => '2岁以下的儿童',
+  'children_interval' => '2— :age 岁的儿童 ',
+  'adults_select' => '成人',
+  'guest_selector' => [
+    'room_number' => '房间数',
+    'adult_number' => '成人',
+    'children_number' => '无儿童',
+    'age_child' => '儿童年龄',
+    'age_children' => '儿童年龄'
+  ],
+  'total' => '合计',
+  'phone_number' => '电话号码',
+  'price_from' => '从',
+  'loading' => '加载中……',
+  'before' => '在……之前',
+  'after' => '在……之后',
+  'loading_error' => '加载房间信息时发生错误，请重新加载页面。',
+  'apply' => '应用',
+  'reset' => '重置',
+  'cancel' => '取消支付',
+];

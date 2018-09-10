@@ -1,0 +1,141 @@
+@import '../modules/header';
+
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  padding: $header-height $margin-small $margin-small;
+
+  .content {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding-bottom: 20px;
+
+    h1, h2 {
+      text-align: center;
+      text-transform: uppercase;
+      width: 100%;
+      float: left;
+      position: relative;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 36px;
+      padding: 0;
+      color: $roomp-color;
+      margin: 0 0 10px 0;
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 20px;
+      text-transform: none;
+      margin: 20px 0 10px 0;
+    }
+
+    h3 {
+      color: $roomp-color;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    input.search {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      float: left;
+      clear: both;
+
+      &::-webkit-input-placeholder {
+        color: #b1b1b1;
+      }
+      &:-moz-placeholder {
+        color: #b1b1b1;
+      }
+      &::-moz-placeholder {
+        color: #b1b1b1;
+      }
+      &:-ms-input-placeholder {
+        color: #b1b1b1;
+      }
+    }
+
+    .nav-support {
+      float: left;
+      clear: both;
+      margin-bottom: 50px;
+
+      a, a:visited {
+        &, &:visited {
+          text-decoration: none;
+          color: black;
+          margin: 5px 0;
+          padding-right: 10px;
+          font-size: 14px;
+          display: block;
+        }
+
+        &:hover {
+          text-decoration: underline;
+          color: $roomp-color;
+        }
+      }
+
+      & > div {
+        position: relative;
+        display: inline;
+        float: left;
+        vertical-align: top;
+        width: 100%;
+      }
+
+      h2 {
+        float: left;
+        clear: both;
+      }
+    }
+
+    .button-up {
+      position: fixed;
+      left: 0;
+      top: $header-height;
+      height: 40px;
+      text-decoration: none;
+      //border: 1px solid #A6A6A6;
+      border-left: none;
+      color: inherit;
+      padding: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.2;
+
+      i {
+        margin-right: 10px;
+      }
+
+      @include common_button;
+    }
+  }
+}

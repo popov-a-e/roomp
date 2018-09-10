@@ -1,0 +1,1321 @@
+@import '../../_variables';
+
+$plate-hover-color: #94A5C4;
+
+@mixin content {
+  .content {
+    width: calc(100% - #{$booking-width + $margin});
+    float: left;
+    position: relative;
+
+    .heroimage {
+      padding-top: 50%;
+      position: relative;
+      width: 100%;
+      float: left;
+      margin-bottom: 20px;
+
+      .photos {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-size: cover;
+        background-position: center center;
+        cursor: pointer;
+
+        @include image_overlay;
+
+        &:before {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      h1, p {
+        color: white;
+        position: absolute;
+        left: $margin;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 20px;
+        bottom: $margin + 16px + 10px;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 16px;
+        bottom: $margin;
+
+        i {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .info {
+      position: relative;
+      width: 100%;
+      float: left;
+
+      > div {
+        position: relative;
+        float: left;
+        width: 100%;
+        padding: 20px;
+        border: 1px solid $booking-alternate;
+        margin-bottom: 20px;
+
+        &.description {
+          display: flex;
+        }
+
+        &.amenities {
+          display: flex;
+
+          h2 {
+            flex: 0 1 20%;
+          }
+
+          div {
+            flex: 0 1 80%;
+            display: block;
+            position: relative;
+            transition: all .3s ease;
+            max-height: 125px;
+            overflow: hidden;
+
+            button {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              z-index: 5;
+              background: none;
+
+              @include normal_button;
+            }
+
+            p {
+              width: 50%;
+              float: left;
+              display: block;
+              position: relative;
+              margin: 0;
+
+              &:not(.marked) {
+                text-decoration: line-through;
+                color: #c6c6c6;
+              }
+            }
+
+            &.full {
+              max-height: 340px; //TODO
+            }
+          }
+        }
+
+        &.rules {
+
+          h2 {
+            flex: 0 1 20%;
+          }
+
+          div {
+            display: flex;
+            width: 100%;
+            float: left;
+
+            div {
+              flex: 0 1 66.67%;
+              display: block;
+              position: relative;
+
+              p {
+                width: 100%;
+                float: left;
+                display: block;
+                position: relative;
+                margin: 0;
+              }
+            }
+          }
+        }
+
+        &.map {
+          height: 300px;
+          border: none;
+          padding: 0;
+        }
+
+        h2 {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          color: $roomp-color;
+          margin: 0;
+          padding: 0;
+          flex: 1 0 20%;
+        }
+
+        &:not(.hotels) p {
+          font-size: 14px;
+          line-height: 20px;
+          color: $roomp-color;
+          margin: 0;
+          padding: 0;
+          flex: 0 1 100%;
+        }
+      }
+
+      .room-nav {
+
+        h2, h3 {
+          width: 110px;
+          font-size: 16px;
+          line-height: 18px;
+          color: $roomp-color;
+          margin-bottom: 25px;
+          font-weight: 500;
+        }
+
+        h2, nav, h3 {
+          margin: 0;
+          float: left;
+        }
+
+        h3 {
+          margin-left: 40px;
+          width: auto;
+        }
+
+        nav {
+          width: 300px;
+          line-height: 16px;
+          font-size: 14px;
+          margin-bottom: 20px;
+
+          a {
+            cursor: pointer;
+            width: 100px;
+            border-bottom: 1px solid #ADADAD;
+            color: #ADADAD;
+            display: block;
+            float: left;
+            text-align: center;
+            padding-bottom: 5px;
+
+            &.checked {
+              border-bottom-color: $roomp-color;
+              color: $roomp-color;
+            }
+          }
+        }
+
+        div.category {
+          float: left;
+          position: relative;
+          width: 100%;
+
+          & > div {
+            float: left;
+            position: relative;
+            width: 50%;
+            height: 188px;
+          }
+
+          .photo-slider {
+            width: 410px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+            overflow: hidden;
+
+            a {
+              transition: height .3s ease-in,
+              width .3s ease-in,
+              top .3s ease-in,
+              left .3s ease-in;
+              position: absolute;
+
+              div {
+                background-size: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                transition: none !important;
+              }
+            }
+          }
+
+          .amenities {
+            width: calc(100% - 430px);
+            margin-left: 20px;
+            border-left: 1px solid #adadad;
+            padding: 0 20px;
+            overflow: hidden;
+
+            span {
+              width: 100%;
+              float: left;
+              font-size: 14px;
+              color: $roomp-color;
+            }
+
+            .scrollbar {
+              width: 8px;
+              right: 0;
+              height: 100px;
+              border-radius: 4px;
+              background: #ececec;
+              position: absolute;
+              cursor: pointer;
+              cursor: grab;
+              cursor: -webkit-grab;
+            }
+          }
+        }
+      }
+
+      .hotels {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        border: none;
+        flex-wrap: wrap;
+
+        h2 {
+          width: 100%;
+          margin: 0 0 20px 20px;
+          flex: 0 1 auto;
+        }
+
+        .hotel {
+          width: calc(50% - 10px);
+        }
+      }
+    }
+
+    .gallery-overlay {
+      position: fixed;
+      padding: $roomp-header-height 20px;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 101;
+      user-select: none;
+      -webkit-user-select: none;
+
+      @include image_overlay;
+
+      &:before {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .gallery-overlay-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        float: left;
+        display: block;
+
+        &:before {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .main-gallery-view {
+          position: relative;
+          width: 100%;
+          margin-bottom: 20px;
+          height: calc(100% - 120px);
+          float: left;
+          padding: 0 10%;
+
+          .gallery-overlay-image {
+            width: 100%;
+            display: flex;
+            float: left;
+            position: relative;
+            justify-content: center;
+            height: 100%;
+
+            .image-container {
+              position: relative;
+              height: 100%;
+              width: calc((100vh - 140px) * 3 / 2);
+              padding: 20px 120px;
+              background: none;
+
+              .image {
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+              }
+
+              button {
+                position: absolute;
+                top: 0;
+                background: none;
+                height: 100%;
+                text-align: center;
+                display: flex;
+                display: -webkit-box;
+                justify-content: center;
+                align-items: center;
+                width: 120px;
+                margin: 0;
+                padding: 0;
+
+                i {
+                  color: #999;
+                  font-size: 30px;
+                  transition: color .3s ease;
+                }
+
+                &:hover {
+                  i {
+                    color: white;
+                  }
+                }
+
+                @include normal_button;
+
+                &.prev {
+                  left: 0;
+                }
+
+                &.next {
+                  right: 0;
+                }
+              }
+            }
+
+            .description {
+              height: 100%;
+              width: 300px;
+              background: white;
+              padding: 10px 20px;
+
+              h2 {
+                width: 100%;
+                float: left;
+                position: relative;
+                text-align: center;
+                color: $roomp-color;
+                font-size: 16px;
+                text-transform: uppercase;
+                margin: 10px 0 0 0;
+                padding: 0;
+              }
+
+              > div {
+                width: 100%;
+                float: left;
+                position: relative;
+
+                > h3, > span {
+                  width: 100%;
+                  float: left;
+                  position: relative;
+                  color: $roomp-color;
+                }
+
+                h3 {
+                  font-size: 16px;
+                  margin: 10px 0;
+                }
+
+                span {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+
+        .sub-gallery-container {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 100px;
+          left: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .sub-gallery {
+          position: relative;
+          height: 100px;
+
+          .gallery-photo-overflow {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            left: 0;
+            top: 0;
+
+            > div {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 1000px;
+              height: 100%;
+
+              > div {
+                height: 100%;
+                width: 150px;
+                margin-right: 20px;
+                background-size: cover;
+              }
+            }
+          }
+
+          button {
+            background: none;
+            color: white;
+            height: 100px;
+            width: 40px;
+            line-height: 100px;
+            font-size: 20px;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            position: absolute;
+
+            &.prev {
+              left: -40px;
+            }
+
+            &.next {
+              right: -40px;
+            }
+          }
+        }
+      }
+    }
+
+    .payment-overlay {
+      position: fixed;
+      padding: $roomp-header-height 20px;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 101;
+      user-select: none;
+      -webkit-user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include image_overlay;
+
+      &:before {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .payment-overlay-inner {
+        position: relative;
+        display: block;
+        background: white;
+        padding: 20px;
+        width: 600px;
+
+        h2 {
+          margin: 0;
+          padding: 0;
+          font-size: 18px;
+          color: $roomp-color;
+          float: left;
+          width: 100%;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        table {
+          width: 100%;
+          padding: 0;
+          margin: 20px 0;
+
+          td, th {
+            text-align: center;
+            font-weight: 400;
+            color: $roomp-color;
+            font-size: 14px;
+            line-height: 30px;
+
+            &:first-child {
+              text-align: left;
+            }
+          }
+
+          tr:first-child th {
+            border-bottom: 1px solid $booking-alternate;
+          }
+
+          tr:last-child td {
+            border-top: 1px solid $booking-alternate;
+          }
+        }
+
+        .nav {
+          width: 100%;
+          display: flex;
+          float: left;
+          justify-content: center;
+          align-items: center;
+
+          button {
+            line-height: 30px;
+            width: 100px;
+
+            &.back {
+              @include ghost_button;
+              margin-left: 20px;
+            }
+
+            &.pay {
+              @include common_button;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin booking {
+  .booking {
+    width: $booking-width;
+    border: 1px solid $booking-alternate;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    background: white;
+    max-height: calc(100vh - 60px);
+    overflow: hidden;
+
+    &.fixed {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    > .scrollbar {
+      width: 8px;
+      right: 0;
+      height: 100px;
+      border-radius: 4px;
+      background: #ececec;
+      position: absolute;
+      cursor: pointer;
+      cursor: grab;
+      cursor: -webkit-grab;
+      margin: 20px 5px 0 0;
+    }
+
+    @media screen and (max-width: 1600px) {
+      & {
+        right: 20px;
+      }
+    }
+
+    .header {
+      width: 100%;
+      height: 30px;
+      position: relative;
+      float: left;
+      flex: 0 1 30px;
+      margin-top: 10px;
+
+      h2 {
+        font-weight: 500;
+        color: $roomp-color;
+        font-size: 18px;
+        line-height: 30px;
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .rooms {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      flex-basis: auto;
+
+      .dates {
+        position: relative;
+        float: left;
+        padding: 0 20px;
+        width: 100%;
+
+        .placeholder {
+          width: 100%;
+          text-align: center;
+          height: 40px;
+          line-height: 40px;
+          font-size: 14px;
+        }
+
+        .form {
+          border: 1px solid $booking-alternate;
+          display: flex;
+          border-radius: 2px;
+          float: left;
+          width: 100%;
+          height: 50px;
+          padding: 5px;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+
+          .from, .till {
+            position: absolute;
+            top: 6px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+
+            &:hover a {
+              text-decoration: underline;
+            }
+          }
+
+          .from {
+            border-right: 1px solid $booking-alternate;
+            left: 0;
+          }
+
+          .till {
+            left: 50%;
+
+          }
+
+          a {
+            font-size: 13px;
+            text-decoration: none;
+
+            &.date {
+              color: $roomp-color;
+            }
+
+            &.day {
+              color: $booking-color;
+            }
+          }
+
+          span.nights {
+            background-color: white;
+            font-size: 13px;
+            line-height: 16px;
+            color: $booking-color;
+            cursor: pointer;
+            z-index: 5;
+          }
+        }
+      }
+
+      .picker {
+        width: 100%;
+        float: left;
+        position: relative;
+        font-size: 13px;
+        flex: 1;
+
+        .empty, .loading, .loading_error {
+          width: inherit;
+          float: inherit;
+          position: inherit;
+          padding: 0 20px;
+          text-align: center;
+          display: flex;
+          height: 200px;
+
+          justify-content: center;
+          align-items: center;
+
+          span {
+            font-size: 16px;
+            color: $roomp-color;
+          }
+        }
+
+        .placeholder {
+          width: 100%;
+          text-align: center;
+          height: 40px;
+          line-height: 40px;
+          font-size: 14px;
+        }
+
+        .options {
+          width: 100%;
+          float: left;
+          position: inherit;
+          padding: 0 20px;
+
+          .option {
+            width: inherit;
+            float: inherit;
+            position: inherit;
+            margin-bottom: 10px;
+
+            button {
+              @include normal_button;
+            }
+
+            &:last-child {
+              margin: 0;
+            }
+
+            &.picked {
+              .general, .general:hover {
+                background: $plate-hover-color;
+                border: 1px solid $plate-hover-color;
+                color: $roomp-color;
+                padding: 0 20px;
+                height: 50px;
+                line-height: 50px;
+                margin: 0;
+                font-size: 13px;
+
+                div {
+                  color: white;
+                }
+
+                * {
+                  color: $roomp-color;
+                }
+              }
+
+              margin-bottom: 0;
+            }
+
+            > div {
+              width: inherit;
+              float: inherit;
+              position: inherit;
+
+              &.general {
+                background: #A6C6E6;
+                border: 1px solid #A6C6E6;
+                padding: 0 20px;
+                cursor: pointer;
+                height: 50px;
+
+                &:hover {
+                  background: $plate-hover-color;
+                  border: 1px solid $plate-hover-color;
+
+                  div {
+                    color: black;
+                  }
+                }
+
+                div {
+                  color: black;
+                  line-height: 50px;
+                }
+
+                div.plus {
+                  float: left;
+                  margin-right: 10px;
+                }
+
+                div.room_name {
+                  float: left;
+                }
+
+                div.room_price {
+                  float: right;
+                }
+              }
+
+            }
+          }
+        }
+
+        .results {
+          width: 100%;
+          float: left;
+          position: relative;
+          padding: 0 20px;
+
+          .results-container {
+            width: inherit;
+            float: inherit;
+            position: inherit;
+          }
+
+          .room {
+            width: inherit;
+            float: inherit;
+            position: inherit;
+
+            margin-bottom: 10px;
+
+            .short {
+              width: inherit;
+              float: inherit;
+              position: inherit;
+              padding: 5px 20px 5px 0;
+              border: 1px solid $booking-alternate;
+              border-radius: 1px;
+              height: 50px;
+
+              display: flex;
+              align-content: center;
+              justify-content: center;
+
+              button {
+                @include normal_button;
+
+                background: none;
+                flex: 1 0 40px;
+                padding: 0;
+                margin: 0;
+
+                i {
+                  font-size: 10px;
+                }
+              }
+
+              & > div {
+                flex: 0 1 100%;
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                justify-content: space-between;
+
+                > div {
+                  display: flex;
+                  flex-direction: column;
+                  align-content: right;
+                  justify-content: center;
+
+                  &:first-child {
+                    align-content: left;
+                  }
+
+                  > div, a {
+                    font-size: 13px;
+                    line-height: 20px;
+                  }
+
+                  a {
+                    color: $roomp-color;
+                  }
+                }
+              }
+            }
+
+            .guests {
+              border: 1px solid $booking-alternate;
+              width: 100%;
+              float: left;
+              margin-top: -1px;
+            }
+          }
+        }
+
+        div.guests {
+          display: flex;
+          background: white;
+          flex-direction: column;
+          border: 1px solid $plate-hover-color;
+          margin: 0 0 10px 0;
+          padding: 10px 15px 10px 0;
+          height: auto;
+
+          > .sel-group {
+            display: flex;
+            line-height: 30px;
+
+            button {
+              @include normal_button;
+            }
+
+            .plus_selector {
+              button, span {
+                line-height: 30px;
+                height: 30px;
+                float: left;
+                display: block;
+                margin: 0;
+                padding: 0;
+              }
+
+              span {
+                width: 30px;
+                text-align: center;
+              }
+
+              button {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+                margin-top: 5px;
+                border: 1px solid #e0e0e0;
+                border-radius: 15px;
+                line-height: 1rem;
+                display: block;
+                padding-bottom: 2px;
+              }
+
+            }
+
+            label {
+              flex: 1;
+              padding-left: 10px;
+            }
+
+            p {
+              margin: 0;
+              padding: 0 10px;
+              flex: 0 1 80px;
+              text-align: right;
+            }
+          }
+
+          > .cselect {
+            flex: 0 1 100%;
+            line-height: 30px;
+
+            label {
+              padding: 0 10px;
+              border-right: 1px solid $booking-alternate;
+            }
+
+            > div {
+              border: 1px solid $booking-alternate;
+              border-top: none;
+              width: calc(100% + 1px);
+              margin: -1px 0 0 -1px;
+              padding: 5px 10px;
+            }
+
+            i {
+              font-size: 8px;
+            }
+          }
+
+          .price {
+            width: 100%;
+
+            p {
+              padding: 0 10px;
+              white-space: nowrap;
+              line-height: 30px;
+              text-align: right;
+              width: auto;
+              margin: 0;
+
+              &:first-child {
+                float: left;
+              }
+
+              &:last-child {
+                float: right;
+              }
+            }
+          }
+
+          div.buttons {
+            float: left;
+            position: relative;
+            width: 100%;
+
+            button {
+              float: right;
+              line-height: 30px;
+              margin-lefT: 10px;
+              width: 100px;
+
+              &.apply {
+                @include common_button;
+                border: 1px solid #304090;
+              }
+
+              &.cancel {
+                @include ghost_button;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .bill {
+      padding: 0 20px;
+      float: left;
+      font-size: 13px;
+
+      .row {
+        width: 100%;
+        float: left;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        &:first-child {
+          border-top: 1px solid $booking-alternate;
+          padding-top: 10px;
+        }
+      }
+
+      .breakfast {
+        padding: 10px 20px 0;
+        float: left;
+        font-size: 13px;
+      }
+    }
+
+    .book {
+      position: relative;
+      float: left;
+      width: 100%;
+      flex: 0 1 auto;
+      padding: 20px;
+
+      .return-back {
+        display: flex;
+        height: 50px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .info {
+          flex: 0 1 100%;
+          height: 100%;
+          padding: 5px;
+          border: 1px solid $booking-alternate;
+
+          p {
+            width: 100%;
+            text-align: center;
+            float: left;
+            display: block;
+            line-height: 20px;
+            font-size: 13px;
+            margin: 0;
+          }
+        }
+
+        button {
+          flex: 1 0 auto;
+          height: 100%;
+          margin-left: 10px;
+
+          @include normal_button;
+          @include ghost_button;
+        }
+      }
+
+      .user-info {
+        width: 100%;
+        float: left;
+
+        input:not([type=checkbox]) {
+          height: 50px;
+          line-height: 50px;
+          padding: 0 10px;
+          -webkit-appearance: none;
+          outline: none;
+          border: solid 1px darken($booking-alternate, 30);
+          border-radius: 0;
+        }
+
+        > label {
+          margin-bottom: 10px;
+          float: left;
+          display: block;
+          font-size: 14px;
+          line-height: 20px;
+        }
+
+        textarea {
+          padding: 10px;
+          max-width: 100%;
+          height: 50px;
+          -webkit-appearance: none;
+          outline: none;
+          border-radius: 0;
+          border-color: darken($booking-alternate, 30);
+        }
+
+        > input, > div, textarea {
+          width: 100%;
+          margin: 0 0 10px 0;
+        }
+
+        > div.errors {
+          float: left;
+          position: relative;
+          width: 100%;
+          color: red;
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+
+      .bill {
+        padding: 0;
+      }
+
+      .buttons {
+        float: left;
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+
+        button {
+          float: left;
+          width: calc(50% - 10px);
+          font-size: 14px;
+
+          @include normal_button;
+
+          &.alone {
+            width: 100%;
+          }
+
+          &.offline {
+            @include ghost_button;
+          }
+
+          &.online {
+            @include common_button;
+          }
+        }
+      }
+    }
+
+    .promo {
+      padding: 15px 0 10px 0;
+      float: left;
+      width: 100%;
+      border-top: 1px solid $booking-alternate;
+
+      input {
+        line-height: 40px;
+        width: calc(60% - 20px);
+        float: left;
+        height: 40px;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      button {
+        width: 40%;
+        float: left;
+        line-height: 40px;
+        height: 40px;
+        margin: 0 0 0 20px;
+        padding: 0 10px;
+
+        &.apply {
+          border: none;
+          @include common_button;
+        }
+
+        &.cancel {
+          @include ghost_button;
+          border: 1px solid $roomp-color;
+
+          &:hover {
+            background: lighten($roomp-color, 50);
+          }
+        }
+      }
+
+      p.error {
+        float: left;
+        color: red;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+      }
+
+      div.success {
+        float: left;
+        color: $roomp-color;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        text-align: left;
+        width: calc(60% - 20px);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 40px;
+
+        p {
+          padding: 0;
+          margin: 0;
+          text-align: center;
+        }
+      }
+    }
+
+    .switcher {
+      position: relative;
+      float: left;
+      width: 100%;
+      padding: 0 20px 20px 20px;
+
+      hr {
+        width: inherit;
+        float: inherit;
+        position: inherit;
+        margin: 10px 0 20px;
+        border: none;
+        border-top: 1px solid $booking-alternate;
+      }
+
+      button {
+        @include normal_button;
+        @include common_button;
+        width: inherit;
+        float: inherit;
+        position: inherit;
+
+        height: 60px;
+        color: white;
+        font-size: 16px;
+        line-height: 60px;
+        text-align: center;
+
+        &[disabled], &[disabled]:hover {
+          background: darken(#e1e1e1, 15);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,154 @@
+@import './modules/header';
+@import './modules/footer';
+@import '../../_common';
+
+main {
+  .tabs {
+    width: 100%;
+    float: left;
+    background: white;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    .user-info {
+      > * {
+        width: 50%;
+        float: left;
+
+        > div {
+          width: 500px;
+          float: left;
+          margin-bottom: 10px;
+
+          label, span, input:not([type]), select {
+            height: 50px;
+            line-height: 50px;
+            margin: 0;
+          }
+
+          input:not([type=radio]) {
+            padding-left: 10px;
+          }
+
+          div.countryinput {
+            margin-top: 0;
+          }
+
+          > label {
+            width: 100%;
+            display: flex;
+
+            span {
+              flex: 1 0 200px;
+            }
+
+            input {
+              flex: 0 1 100%;
+            }
+          }
+
+          &.sex, &.birthday {
+            width: 500px;
+            display: flex;
+
+            select {
+              flex: 0 1 100%;
+
+              &:not(:first-child) {
+                margin-left: 10px;
+              }
+            }
+
+            span {
+              flex: 1 0 200px;
+            }
+
+            > div {
+              flex: 0 1 100%;
+              display: flex;
+            }
+
+            label {
+              flex: 0 1 100%;
+
+              &:first-child {
+                margin-right: 10px;
+              }
+
+              span, input {
+                height: 50px;
+                line-height: 50px;
+                float: left;
+                margin: 0;
+              }
+
+              span {
+                padding-left: 10px;
+              }
+            }
+          }
+
+          button {
+            float: right;
+
+            @include common_button;
+            width: 300px;
+            line-height: 50px;
+          }
+
+        }
+      }
+
+      h1 {
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 0;
+        font-size: 20px;
+      }
+
+      .profile-data {
+      }
+
+      .password {
+
+      }
+    }
+
+    .reservations {
+      h1 {
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 0;
+        font-size: 20px;
+      }
+
+      table {
+        width: 100%;
+
+        th {
+          text-align: left;
+          border-bottom: 1px solid $roomp-color;
+        }
+
+        th, td {
+          padding: 5px;
+        }
+      }
+    }
+  }
+
+  nav {
+    float: left;
+    width: 100%;
+
+    a {
+      float: left;
+      padding: 10px;
+      text-decoration: none;
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+  }
+}

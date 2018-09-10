@@ -1,0 +1,67 @@
+@import './_variables';
+
+body,html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  height: 100vh;
+  background-color: #f1f1f1;
+
+  padding: 0 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    background: white;
+    border-radius: 3px;
+    border: 1px solid #9d9d9d;
+    padding: 30px;
+
+    img {
+      margin: 10px auto 20px;
+      display: block;
+    }
+
+    h1 {
+      font-size: 24px;
+      width: 100%;
+      text-align: center;
+      font-weight: 400;
+      color: $roomp-color;
+    }
+
+    input {
+      width: 100%;
+      line-height: 50px;
+      padding: 0 10px;
+      border: none;
+      outline: none;
+      background: $booking-alternate;
+
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+    }
+
+    button {
+      line-height: 50px;
+      width: 100%;
+      margin-top: 20px;
+
+      @include common_button;
+
+    }
+  }
+}

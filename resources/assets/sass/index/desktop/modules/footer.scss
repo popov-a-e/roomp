@@ -1,0 +1,147 @@
+@import './../../../_variables.scss';
+
+footer {
+  float: left;
+  width: 100%;
+  z-index: 50;
+  background: white;
+
+  .white-space {
+    height: 20px;
+    position: absolute;
+    top: -20px;
+    width: 100%;
+    background: white;
+  }
+
+  .footer {
+    background: $booking-alternate;
+    width: 100%;
+    float: left;
+    padding: 20px;
+
+    > div {
+      width: 22%;
+      float: left;
+
+      > * {
+        float: left;
+        width: 100%;
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      h3 {
+        margin: 0 0 20px 0;
+        font-size: 16px;
+        font-weight: 400 !important;
+      }
+
+      a {
+        text-decoration: none;
+        color: $roomp-color;
+        margin: 5px 0;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
+    .subscribe {
+      width: 34%;
+      position: relative;
+
+      input {
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      h3 {
+        float: left;
+        line-height: 20px;
+        width: auto;
+      }
+
+      .social {
+        float: right;
+        width: auto;
+
+        a {
+          float: left;
+          width: 30px;
+          margin: 0;
+          font-size: 18px;
+          text-align: center;
+        }
+      }
+
+      > a {
+        position: absolute;
+        right: 0;
+        padding-right: 10px;
+        width: auto;
+        top: 46px;
+      }
+
+      hr {
+        width: calc(100% - 2px);
+        margin-top: 30px;
+        margin-left: 1px;
+        border: none;
+        border-top: 1px solid #AEAEAE;
+      }
+
+      .blocks {
+        float: right;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 70%;
+      }
+    }
+  }
+
+  .sub-footer {
+    width: 100%;
+    float: left;
+    padding: 0 20px;
+    margin: 20px 0 0 0;
+    border: 1px solid $booking-alternate;
+
+    p, a {
+      margin: 0;
+      padding: 0;
+      line-height: 40px;
+      font-size: 12px;
+      font-weight: 400;
+      color: gray;
+      text-decoration: none;
+    }
+
+    p {
+      float: left;
+    }
+
+    a {
+      float: right;
+    }
+
+  }
+
+  > button {
+    position: absolute;
+    top: -63px;
+    height: 43px;
+    border: none;
+    outline: none;
+    left: calc(50% - 50px);
+    background: none;
+    font-size: 30px;
+    color: white;
+    padding: 0;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+  }
+}

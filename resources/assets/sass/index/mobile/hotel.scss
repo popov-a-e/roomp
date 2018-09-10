@@ -1,0 +1,663 @@
+@import './modules/header';
+@import './modules/datepicker';
+@import '../components/hotel';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+  -webkit-appearance: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+input[type=checkbox] {
+  -webkit-appearance: checkbox;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  padding: $header-height $margin-small $margin-small;
+
+  @include booking;
+
+  &, * {
+    cursor: default !important;
+  }
+
+  .guests-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+
+    @include image_overlay;
+
+    div.guests {
+      background: white;
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      border: none;
+      width: 300px;
+      padding: 10px;
+
+      div.room-name {
+        text-align: center;
+        color: $roomp-color;
+        width: 100%;
+        font-size: 16px;
+        margin: 0;
+        line-height: 40px;
+      }
+
+      .sel-group {
+        display: flex;
+        line-height: 30px;
+        margin: 0;
+        padding: 0;
+
+        label {
+          width: auto;
+          line-height: 30px;
+          height: 30px;
+
+          &:first-child {
+            flex: 1;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          &:nth-child(2) {
+            width: 60px;
+          }
+
+          span {
+            line-height: 30px;
+            text-align: right;
+            padding-right: 30px;
+            height: 30px;
+          }
+
+          i {
+            height: 30px;
+            line-height: 35px;
+          }
+        }
+
+        p {
+          margin: 0;
+          text-align: right;
+          width: 60px;
+          line-height: 30px;
+        }
+      }
+
+      .select {
+        span {
+          font-size: 16px;
+          color: $roomp-color;
+        }
+
+        select {
+
+        }
+
+        i {
+          font-size: 11px;
+        }
+      }
+
+      > div.price {
+        text-align: center;
+        color: $roomp-color;
+        width: 100%;
+        font-size: 16px;
+        margin: 0 0 $margin-small;
+      }
+
+      .buttons {
+        button {
+          float: left;
+          width: calc(50% - 5px);
+          font-size: 14px;
+          line-height: 40px;
+          height: 40px;
+          padding: 0;
+
+          &:first-child {
+            margin-right: $margin-small;
+
+            @include common_button;
+          }
+
+          &:last-child {
+            @include ghost_button;
+          }
+        }
+      }
+    }
+  }
+
+  .content-container {
+    padding-bottom: 40px;
+    float: left;
+    position: relative;
+
+    .heroimage {
+      padding-top: 50%;
+      position: relative;
+      width: 100%;
+      float: left;
+      margin-bottom: $margin-small;
+
+      .photos {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-size: cover;
+        background-position: center center;
+        cursor: pointer;
+
+        @include image_overlay;
+
+        &:before {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      h1, p {
+        color: white;
+        position: absolute;
+        left: $margin-small;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 20px;
+        bottom: $margin-small + 16px + 10px;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 16px;
+        bottom: $margin-small;
+
+        i {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .info {
+      position: relative;
+      width: 100%;
+      float: left;
+
+      > div {
+        position: relative;
+        float: left;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $booking-alternate;
+        margin-bottom: 10px;
+
+        &.description {
+          display: flex;
+        }
+
+        &.amenities {
+          display: block;
+
+          h2 {
+            display: block;
+            margin: 5px 0 10px;
+            line-height: 20px;
+            padding: 0;
+            width: 100%;
+            float: left;
+            text-transform: uppercase;
+          }
+
+          div {
+            display: block;
+            position: relative;
+            transition: all .3s ease;
+            max-height: 20px * 5;
+            overflow: hidden;
+            width: 100%;
+
+            button {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              z-index: 5;
+              background: none;
+              @include normal_button;
+
+              cursor: default;
+            }
+
+            p {
+              width: 50%;
+              float: left;
+              display: block;
+              position: relative;
+              margin: 0;
+              line-height: 20px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              padding-right: 5px;
+
+              &:not(.marked) {
+                text-decoration: line-through;
+                color: #c6c6c6;
+              }
+            }
+
+            &.full {
+              max-height: 20px * 12; //TODO
+            }
+          }
+        }
+
+        &.rules {
+          h2 {
+            flex: 0 1 20%;
+          }
+
+          > div {
+            display: block;
+            width: 100%;
+            float: left;
+
+            &:not(:first-child) {
+              margin-top: $margin-small;
+            }
+
+            > h2 {
+              display: block;
+              margin: 5px 0 10px;
+              padding: 0;
+              width: 100%;
+              float: left;
+              text-transform: uppercase;
+            }
+
+            > div {
+              width: 100%;
+              display: block;
+              position: relative;
+
+              p {
+                width: 100%;
+                float: left;
+                display: block;
+                position: relative;
+                margin: 0;
+              }
+            }
+          }
+        }
+
+        &.map {
+          height: 300px;
+          border: none;
+          padding: 0;
+        }
+
+        h2 {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          color: $roomp-color;
+          margin: 0;
+          padding: 0;
+          flex: 1 0 20%;
+        }
+
+        &:not(.hotels) p {
+          font-size: 14px;
+          line-height: 20px;
+          color: $roomp-color;
+          margin: 0;
+          padding: 0;
+          flex: 0 1 100%;
+        }
+      }
+
+      .hotels {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        border: none;
+        flex-wrap: wrap;
+        margin-bottom: 0;
+
+        h2 {
+          width: 100%;
+          margin: 15px 10px;
+          flex: 0 1 auto;
+          text-transform: uppercase;
+        }
+
+        .hotel {
+          width: 100%;
+
+          &:before {
+            padding-top: 45%;
+          }
+
+          &:not(:first-of-type) {
+            margin-top: $margin-small;
+          }
+        }
+      }
+
+      .map {
+        height: 240px;
+        margin: 0;
+      }
+    }
+
+    .payment-overlay {
+      position: fixed;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 3001;
+      user-select: none;
+      -webkit-user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include image_overlay;
+
+      &:before {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .payment-overlay-inner {
+        position: relative;
+        display: block;
+        background: white;
+        padding: 10px;
+        width: 100%;
+
+        h2 {
+          margin: 0;
+          padding: 0;
+          font-size: 18px;
+          color: $roomp-color;
+          float: left;
+          width: 100%;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        table {
+          width: 100%;
+          padding: 0;
+          margin: 20px 0;
+
+          td, th {
+            text-align: center;
+            font-weight: 400;
+            color: $roomp-color;
+            font-size: 14px;
+            line-height: 30px;
+
+            &:first-child {
+              text-align: left;
+            }
+          }
+
+          tr:first-child th {
+            border-bottom: 1px solid $booking-alternate;
+          }
+
+          tr:last-child td {
+            border-top: 1px solid $booking-alternate;
+          }
+        }
+
+        .nav {
+          width: 100%;
+          display: flex;
+          float: left;
+          justify-content: center;
+          align-items: center;
+
+          button {
+            line-height: 30px;
+            width: 100px;
+
+            &.back {
+              @include ghost_button;
+              margin-left: 20px;
+            }
+
+            &.pay {
+              @include common_button;
+            }
+          }
+        }
+      }
+    }
+
+    > button.book {
+      position: fixed;
+      display: block;
+      width: calc(100% - #{2 * $margin-small});
+      bottom: 0; //$margin-small;
+      left: $margin-small;
+      line-height: 40px;
+      height: 40px;
+      font-size: 14px;
+
+      @include common_button;
+    }
+  }
+
+  .gallery-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include image_overlay;
+
+    &:before {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .image-container {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      button {
+        position: absolute;
+      }
+
+      &:not(.moving) img {
+        transition: margin .3s ease;
+      }
+
+      img {
+        position: relative;
+      }
+    }
+  }
+
+  .booking {
+    width: 100%;
+    overflow: auto;
+    position: fixed;
+    z-index: 999;
+    max-height: none;
+    right: 0;
+    left: 0;
+    top: $header-height;
+    height: calc(100% - #{$header-height});
+
+    > button.close {
+      @include normal_button;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      z-index: 1001;
+    }
+
+    div.dates {
+      &, * {
+        cursor: default;
+      }
+    }
+
+    div.rooms {
+      div.dates {
+        padding: 0 10px;
+      }
+
+      div.picker {
+
+        div.options {
+          padding: 0 10px;
+
+          div.option {
+
+            &, * {
+              cursor: default;
+            }
+
+            &.picked {
+              margin-bottom: $margin-small;
+            }
+
+            div.general {
+              cursor: default;
+              display: flex;
+
+              div.room_name {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                flex: 1;
+              }
+            }
+          }
+        }
+
+        div.results {
+          padding: 0 10px;
+
+          .room {
+            .short {
+              padding: 5px 5px 5px 0;
+
+              display: flex;
+              align-items: stretch;
+
+              button {
+                width: 30px;
+                flex: 1 0 30px;
+                min-width: 0;
+              }
+
+              .description {
+                padding-right: 5px;
+                flex: 0 1 100%;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+
+                > div {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  display: block;
+                }
+              }
+
+              .price {
+                min-width: 0;
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                flex: 1 0 auto;
+              }
+            }
+          }
+        }
+      }
+
+      div.switcher {
+        padding: 0 10px 10px;
+      }
+    }
+
+    div.bill {
+      padding: 0 10px;
+
+      .row {
+        padding: 0 10px;
+        display: flex;
+
+        div.info {
+          flex: 1;
+        }
+
+        div.cost {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &:first-child {
+          padding-top: 10px;
+        }
+      }
+
+      .breakfast {
+        padding: 10px 10px 0;
+      }
+    }
+
+    div.book {
+      padding: 10px;
+    }
+  }
+}

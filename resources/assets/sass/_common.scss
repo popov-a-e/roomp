@@ -1,0 +1,29 @@
+body, html {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  /*min-height: calc(100vh - #{$roomp-header-height});*/
+  max-width: 1600px;
+  margin-top: $roomp-header-height;
+
+  padding: 0 20px 20px 20px;
+}

@@ -1,0 +1,595 @@
+@import './modules/header';
+
+$sidebar-width: 55%;
+
+@mixin cbutton {
+  & {
+    -webkit-appearance: none;
+    border: none;
+    outline: none !important;
+    background: #ececec;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 12px;
+
+    &:not([disabled]) {
+      &:hover {
+        background: #e0e0e0;
+      }
+
+      &.active {
+        background: #304090;
+        color: white;
+
+        &:hover {
+          background: #24306d;
+        }
+      }
+    }
+
+    &[disabled] {
+      background: rgba(236, 236, 236, 0.5);
+
+      &.active {
+        background: rgba(48, 64, 144, 0.5);
+        color: white;
+      }
+    }
+  }
+
+  &.active {
+    background: #304090;
+    color: white;
+  }
+}
+
+body, html {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  margin: 0 20px;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  height: calc(100vh - #{$roomp-header-height});
+  max-width: 1600px;
+  margin-top: $roomp-header-height;
+
+  .sidebar {
+    position: relative;
+    width: $sidebar-width;
+    float: left;
+    padding: 0 20px;
+    margin: 0;
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+
+    .filters {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      &.open {
+        overflow: hidden;
+      }
+
+      h2 {
+        float: left;
+        font-size: 12px;
+        font-weight: 400;
+        width: 140px;
+        padding: 0;
+        margin: 0;
+        line-height: 30px;
+        flex: 1 0 140px;
+      }
+
+      .general, .secondary, .amenities {
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #f0f0f0;
+        border-radius: 1px;
+        padding: 20px 0 20px 20px;
+      }
+
+      .secondary-overlay {
+        //overflow: hidden;
+      }
+
+      .secondary {
+        float: left;
+      }
+
+      .secondary > div {
+        float: left;
+        width: 100%;
+        display: flex;
+      }
+
+      .general {
+        top: 0;
+        background: white;
+        z-index: 8;
+        height: 70px;
+        padding: 0 0 20px 0;
+        border: none;
+        margin: 0;
+
+        .white-overlay {
+          padding: 10px 0 10px 0;
+          border: 1px solid #f0f0f0;
+          height: 50px;
+          width: 100%;
+          display: flex;
+
+          & > * {
+            flex: 1 1 auto;
+            position: relative;
+            line-height: 30px;
+          }
+
+          .dates {
+            flex: 1 0 auto;
+            padding: 0 20px;
+
+            a {
+              font-size: 12px;
+              text-decoration: none;
+              color: black;
+            }
+
+            .arrow {
+              line-height: 30px;
+              padding: 0 10px;
+            }
+          }
+
+          .cselect {
+            padding-right: 10px;
+            font-size: 12px;
+
+            &.cities {
+              border-right: 1px solid #ebebeb;
+              flex: 0 1 100%;
+              min-width: 130px;
+
+              a.disabled {
+                display: none;
+              }
+            }
+
+            &.guests, &.rooms {
+              border-left: 1px solid #ebebeb;
+            }
+          }
+
+          .guest_selector {
+            float: left;
+            height: 30px;
+            padding: 0 5px;
+            line-height: 30px;
+            font-size: 12px;
+            margin-left: 1px;
+
+
+            .guest_selector_data {
+              cursor: pointer;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              width: 200px;
+              height: 100%;
+              border-left: 1px solid #eaeaea;
+
+              span {
+                line-height: 1.5;
+
+                &:first-child {
+                  white-space: pre;
+                  &:after {
+                    content: ", ";
+                  }
+                }
+              }
+            }
+
+            .guests_dialog {
+              position: absolute;
+              top: 100%;
+              right: -1px;
+              margin-top: 8px;
+              background: white;
+              border: 1px solid #f0f0f0;
+              padding: 10px;
+
+              > div.selectors {
+                float: left;
+                display: flex;
+
+                > div {
+                  width: 120px;
+                }
+
+                h4 {
+                  margin: 0;
+                  float: left;
+                }
+
+                .plus_selector {
+                  display: flex;
+
+                  button {
+                    border: none;
+                    color: $roomp-color;
+                    background: none;
+                    font-size: 26px;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    padding: 0;
+                    outline: none;
+                    cursor: pointer;
+                  }
+
+                  span {
+                    display: block;
+                    white-space: nowrap;
+                  }
+                }
+              }
+
+              .children_ages {
+                width: 100%;
+                float: left;
+                margin-top: 5px;
+
+                div.header {
+                  position: relative;
+                  float: left;
+                  width: 100%;
+                  height: 25px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  hr {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    top: 50%;
+                    left: 0;
+                    position: absolute;
+                    border: none;
+                    border-top: 1px solid $booking-alternate;
+                  }
+
+                  h4 {
+                    margin: 0;
+                    position: relative;
+                    background: white;
+                    float: left;
+                    font-weight: 400;
+                    font-size: 12px;
+                    text-align: center;
+                    line-height: 25px;
+                    padding: 0 10px;
+                  }
+                }
+
+                .scrollable_select {
+                  display: block;
+                  float: left;
+                  line-height: 25px;
+                  position: relative;
+
+                  label {
+                    display: block;
+                    cursor: pointer;
+                    padding: 0 20px 0 10px;
+
+                    &:hover {
+                      color: #304090;
+                    }
+                  }
+
+                  i {
+                    float: right;
+                    line-height: 30px;
+                  }
+
+                  .menu {
+                    width: calc(100% + 2px);
+                    top: 100%;
+                    position: absolute;
+                    background: #ffffff;
+                    border: 1px solid #eaeaea;
+                    border-top: none;
+                    padding: 0 10px;
+                    z-index: 10;
+                    max-height: 25px * 5;
+                    overflow: hidden;
+
+                    .scrollbar {
+                      position: absolute;
+                      right: 2px;
+                      width: 3px;
+                      background: #eaeaea;
+                      height: 20px;
+                    }
+                  }
+
+                  .menu a {
+                    width: 100%;
+                    float: left;
+                    clear: both;
+                    cursor: pointer;
+                    font-size: inherit;
+                    white-space: nowrap;
+
+                    &.disabled {
+                      color: gray;
+                      cursor: default;
+                    //  display: none; //TODO
+                    }
+
+                    &:not(.disabled):hover {
+                      background: rgb(240, 240, 240);
+                    }
+
+                    &.disabled:hover {
+                      background: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .allotments {
+        float: left;
+        width: 100%;
+        z-index: 7;
+        padding-bottom: 20px;
+
+        > * {
+          float: left;
+        }
+
+        div {
+          display: flex;
+          width: calc(100% - 200px);
+          justify-content: space-between;
+          flex: 0 1 100%;
+
+          button {
+            width: 100%;
+            line-height: 30px;
+            margin-right: 20px;
+          }
+        }
+      }
+
+      .price {
+        .slider {
+          flex: 0 1 100%;
+        }
+      }
+
+      .amenities {
+        float: left;
+        width: 100%;
+
+        div {
+          display: flex;
+          width: calc(100% - 200px);
+          justify-content: flex-start;
+          flex-wrap: wrap;
+
+          button {
+            padding: 0 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            height: 30px;
+            line-height: 30px;
+
+          }
+        }
+
+        hr {
+          margin: 10px 20px 20px 0;
+          border: none;
+          border-top: 1px solid #f0f0f0;
+        }
+      }
+    }
+
+    nav {
+      height: 50px;
+      background: white;
+      z-index: 5;
+
+      button {
+        min-width: 120px;
+        padding: 0 10px;
+        -webkit-appearance: none;
+        border: none;
+        outline: none !important;
+        background: #ececec;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 20px;
+        cursor: pointer;
+        font-size: 12px;
+
+        i {
+          line-height: 30px;
+          font-size: 8px;
+          float: left;
+          padding-right: 5px;
+        }
+      }
+
+      button:hover {
+        background: #e0e0e0;
+      }
+
+      button.active {
+        background: #304090;
+        color: white;
+      }
+
+      p {
+        float: right;
+        font-size: 12px;
+        line-height: 30px;
+        margin: 0;
+        padding-right: 20px;
+      }
+
+      .cselect {
+        height: 30px;
+        background-color: #e0e0e0;
+        min-width: 160px;
+
+        label {
+          padding: 0 10px;
+        }
+
+        .menu {
+          margin: 0;
+          width: 100%;
+        }
+
+        label, i {
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
+  .hotels {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    flex: 1;
+    margin-top: -20px;
+    align-items: flex-start;
+    transition: all .2s ease;
+    padding-bottom: 40px;
+
+    .hotel {
+      position: relative;
+      width: calc(50% - 10px);
+      margin-top: 20px;
+    }
+
+    .empty {
+      height: 100%;
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .flying-man {
+        width: 40%;
+        height: auto;
+        opacity: 0.15;
+      }
+
+      .text {
+        width: 60%;
+        height: auto;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .controls {
+        display: flex;
+        margin-top: 10px;
+
+        button {
+          @include cbutton;
+        }
+      }
+    }
+  }
+
+  .map {
+    width: calc(#{100% - $sidebar-width} - 20px);
+    position: absolute;
+    left: $sidebar-width;
+    top: 0;
+    height: calc(100% - 20px);
+  }
+}
+
+.cselect {
+  min-width: 110px;
+  font-size: 12px;
+
+  label {
+    padding-left: 10px;
+    font-size: inherit;
+
+    i {
+      font-size: 10px;
+    }
+  }
+
+  .menu {
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    margin-left: -1px;
+    margin-top: 10px;
+
+    a {
+      padding: 10px;
+      line-height: normal;
+      font-size: inherit;
+    }
+  }
+}
+
+.scrollbar {
+  width: 8px;
+  right: 6px;
+  border-radius: 4px;
+  background: #ececec;
+  position: absolute;
+  cursor: pointer;
+  cursor: grab;
+  cursor: -webkit-grab;
+
+  &.active {
+    cursor: pointer;
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+  }
+
+}

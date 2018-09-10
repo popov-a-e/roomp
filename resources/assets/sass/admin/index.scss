@@ -1,0 +1,3330 @@
+@import './_variables';
+@import './modules/header';
+@import './modules/sidebar';
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+div.progress-bar {
+  height: 18px;
+  position: relative;
+
+  > .background {
+    width: 100%;
+    background: #E2E4E7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  > .selected {
+    background: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+
+    transition: width .3s ease;
+  }
+
+  .overlay {
+    mix-blend-mode: screen;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $roomp-color;
+  }
+
+  span {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    mix-blend-mode: difference;
+  }
+}
+
+div.filter {
+  &.filter_select, &.filter_text {
+    display: flex;
+
+    button.inactive {
+      display: none;
+    }
+
+    &:hover {
+      button.inactive {
+        display: block;
+      }
+    }
+  }
+
+  input {
+    height: 100%;
+    border: none;
+    width: calc(100% - 30px);
+
+    &.bordered {
+      border: 1px solid rgb(160, 160, 160);
+    }
+  }
+
+  button {
+    width: 30px;
+  }
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  position: relative;
+  float: left;
+  width: calc(100% - #{$admin-sidebar-width});
+  height: calc(100% - #{$admin-header-height});
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: $admin-color;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  .filter_select {
+    width: 100%;
+    position: relative;
+    float: left;
+    padding: 10px;
+
+    input {
+      width: calc(100% - 20px);
+      line-height: inherit;
+      overflow: hidden;
+      float: left;
+      display: block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      height: 100%;
+      border: none;
+
+      &.bordered {
+        border: 1px solid rgb(160, 160, 160);
+      }
+    }
+
+    > button {
+      float: right;
+      width: 20px;
+    }
+
+    div.menu {
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      left: 0;
+      z-index: 100;
+      border: 1px solid $booking-alternate;
+
+      a {
+        float: left;
+        line-height: inherit;
+        width: 100%;
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        font-weight: 400;
+        padding: 5px 10px;
+        font-size: 14px;
+        background: white;
+
+        &.selected:after {
+          content: "\2714";
+          float: right;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  > nav {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #626467;
+    border-right: 1px solid black;
+
+    .tab-link {
+      width: 281px;
+      height: 30px;
+      float: left;
+      background: #A2A4A7;
+      border-right: 1px solid $admin-color;
+
+      &.router-link-exact-active {
+        background: $admin-color;
+      }
+
+      a {
+        line-height: 30px;
+        width: 250px;
+        text-overflow: ellipsis;
+        float: left;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 0 10px;
+        text-decoration: none;
+        color: $roomp-color;
+      }
+
+      button {
+        @include normal_button;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        float: left;
+
+        i {
+          width: 30px;
+          line-height: 33px;
+          font-size: 12px;
+          height: 30px;
+          display: block;
+          float: left;
+        }
+      }
+    }
+  }
+
+  > div.hotel {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    > div {
+      &.hotel-info-short {
+        grid-column: 1 / 2;
+        /* autoprefixer: off */
+        grid-row: 1 / 11;
+
+        > div {
+          margin-bottom: 40px;
+        }
+
+        > a {
+          @include normal_button;
+
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          color: lightgrey;
+          text-decoration: none;
+
+          &:hover {
+            color: black;
+          }
+        }
+
+        td:last-child {
+          textarea {
+            float: left;
+            width: calc(100% - 40px);
+            resize: vertical;
+
+            &[disabled] {
+              border: none;
+              background: none;
+              resize: none;
+            }
+          }
+
+          button {
+            float: left;
+            margin-left: 10px;
+            width: 30px;
+            height: 30px;
+
+            @include common_button;
+          }
+        }
+      }
+
+      &.hotel-rooms {
+        > a {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          @include normal_button;
+          @include ghost_button;
+          font-size: 14px;
+          line-height: 30px;
+          min-width: 100px;
+          text-align: center;
+          text-decoration: none;
+        }
+      }
+
+      &.hotel-rates, &.integrations, &.policies, &.availability, &.requisites, &.reconcilliation, &.prices {
+        width: auto;
+        padding: 20px 0;
+
+        h2 {
+          width: calc(100% - 100px);
+          float: left;
+          margin-bottom: 0;
+        }
+
+        a {
+          @include normal_button;
+
+          width: 30px;
+          height: 30px;
+          margin: 0;
+          padding: 0;
+          float: left;
+          line-height: 30px;
+        }
+      }
+
+      &.hotel-reservations {
+        width: auto;
+        grid-column: 1 / 3;
+      }
+
+      &.availability {
+        padding: 20px 0;
+      }
+    }
+  }
+
+  .admin-hoteliers-overlay, .admin-channels-overlay, .admin-overlay, .admin-organizations-overlay {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    &:before {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    @include image_overlay;
+
+    .card {
+      max-height: 80%;
+      min-height: 80%;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+
+  .date_filter {
+    float: left;
+    clear: both;
+    margin: 0 0 20px 20px;
+
+    > h5 {
+      padding: 0 20px 0 0;
+      margin: 0;
+      float: left;
+      position: relative;
+      font-size: 14px;
+      line-height: 30px;
+    }
+
+    > * {
+      float: left;
+      display: block;
+      position: relative;
+    }
+
+    > select {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    > div.dates {
+      padding: 0 20px;
+      height: 30px;
+
+      a {
+        font-size: 14px;
+        text-decoration: none;
+        color: black;
+        float: left;
+        display: block;
+        line-height: 30px;
+      }
+
+      .arrow {
+        line-height: 30px;
+        padding: 0 10px;
+
+        i {
+          line-height: 37px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  div.card {
+    margin: 10px;
+    border-radius: 5px;
+    background: white;
+    padding: 20px 0;
+    color: $admin-font-color;
+    position: relative;
+
+    > div.selector {
+      float: right;
+      border: none;
+
+      $hover-color: lighten($roomp-color, 50);
+      $usual-color: lighten($roomp-color, 70);
+      $border-color: $roomp-color;
+
+      button {
+        display: block;
+        float: left;
+        width: 180px;
+        line-height: 28px;
+        background: $usual-color;
+        border: 1px solid $border-color;
+        color: $roomp-color;
+        cursor: pointer;
+        padding: 0;
+        outline: none;
+
+        &:first-child {
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+        }
+
+        &:not(:first-child) {
+          border-left: none;
+        }
+
+        &:last-child {
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
+
+        &:hover {
+          background-color: $hover-color;
+        }
+
+        &.selected, &.selected:hover {
+          background-color: $roomp-color;
+          color: white;
+        }
+      }
+    }
+
+    h2 {
+      margin: 0 20px 20px 20px;
+      text-transform: uppercase;
+      font-size: 18px;
+      width: 100%;
+      text-align: left;
+      font-weight: 500;
+      line-height: 30px;
+    }
+
+    &.monthly-finance {
+      table {
+        th {
+          text-align: left;
+        }
+
+        td, th {
+          padding: 10px;
+
+          &:first-child {
+            padding-left: 20px;
+          }
+        }
+
+        td {
+          border-top: 1px solid #eaeaea;
+
+          &.docs {
+            width: 100px;
+            display: flex;
+
+            a {
+              margin: 0 5px;
+              position: relative;
+              float: left;
+              color: $roomp-color;
+
+              span {
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                color: white;
+                font-size: 12px;
+              }
+            }
+
+            &.empty a {
+              color: #dadada;
+            }
+          }
+        }
+      }
+    }
+
+    &.reconciliation {
+      padding: 20px;
+      h2 {
+        float: left;
+        width: auto;
+        margin: 0;
+      }
+
+      > div {
+        float: left;
+
+        &.selector {
+          float: right;
+        }
+
+        &.statistics {
+          clear: both;
+          width: 100%;
+
+          h4 {
+            margin: 10px 0;
+            padding: 0;
+          }
+
+          p {
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    &.hotel-info {
+      width: 100%;
+
+      > button.delete {
+        float: right;
+        @include common_button;
+
+        background: red;
+        color: white;
+
+        &:hover {
+          background: darken(red, 10);
+        }
+      }
+
+      .lang-selector {
+        margin: 0 20px 20px 20px;
+
+        grid-row: 1;
+        grid-column: 1/2;
+
+        padding: 0 0 20px 0;
+        border: none;
+
+        $hover-color: lighten($roomp-color, 50);
+        $usual-color: lighten($roomp-color, 70);
+        $border-color: $roomp-color;
+
+        button {
+          width: 133px;
+          line-height: 30px;
+          background: $usual-color;
+          border: 1px solid $border-color;
+          color: $roomp-color;
+          cursor: pointer;
+          outline: none;
+
+          &:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+          }
+
+          &:not(:first-child) {
+            border-left: none;
+          }
+
+          &:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+          }
+
+          &:hover {
+            background-color: $hover-color;
+          }
+
+          &.selected, &.selected:hover {
+            background-color: $roomp-color;
+            color: white;
+          }
+        }
+      }
+
+      .hotelier-button {
+        line-height: 30px;
+        width: 200px;
+        @include common_button;
+      }
+
+      div.buttons {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: auto;
+
+        > button {
+          @include normal_button;
+          line-height: 30px;
+          min-width: 100px;
+          margin-left: 20px;
+
+          &.edit {
+            @include common_button;
+            border: 1px solid $roomp-color;
+          }
+
+          &.cancel, &.delete-reset {
+            @include ghost_button;
+            border: 1px solid $roomp-color;
+          }
+
+          &.delete-check {
+            @include ghost_button;
+
+            border-color: red;
+            color: red;
+          }
+
+          &.apply {
+            margin-left: 20px;
+            @include common_button;
+          }
+
+          &.delete {
+            border: 1px red solid;
+            background-color: red;
+            color: white;
+
+            &:hover {
+              border: darken(red, 30);
+              background: darken(red, 30);
+            }
+          }
+        }
+      }
+
+      > input {
+        float: left;
+        line-height: 26px;
+        font-size: 20px;
+        clear: both;
+        width: 400px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+
+        &[disabled] {
+          border: none;
+          color: $roomp-color;
+          background: none;
+          text-transform: uppercase;
+        }
+      }
+
+      > label {
+        float: left;
+        clear: both;
+        margin-left: 20px;
+        margin-bottom: 10px;
+
+        span {
+          cursor: pointer;
+
+          &.active {
+            color: greenyellow;
+          }
+
+          &.inactive {
+            color: orangered;
+          }
+        }
+      }
+
+      div.contact-popup {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+
+        &:before {
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        @include image_overlay;
+
+        > div {
+          width: 400px;
+          position: relative;
+          background: white;
+          z-index: 101;
+          padding: 20px;
+          border-radius: 8px;
+
+          form {
+            width: 100%;
+            height: 100%;
+
+            div.controls {
+              width: 100%;
+
+              button {
+                width: 120px;
+                line-height: 30px;
+                float: right;
+                margin-left: 10px;
+
+                &.apply {
+                  @include common_button;
+                  border: 1px solid $roomp-color;
+                }
+
+                &.cancel {
+                  @include ghost_button;
+                }
+              }
+            }
+
+            label {
+              width: 100%;
+              float: left;
+              clear: both;
+
+              &:not(:last-child) {
+                margin-bottom: 10px;
+              }
+
+              span, input {
+                float: left;
+                display: block;
+                height: 30px;
+                line-height: 30px;
+              }
+
+              span {
+                width: 40%;
+              }
+
+              input, textarea {
+                width: 60%;
+              }
+
+              textarea {
+                resize: vertical;
+              }
+            }
+          }
+        }
+      }
+
+      table tr td table.contacts {
+        td {
+          margin: 0;
+          padding: 5px;
+          width: auto;
+          min-width: 0;
+          max-width: none;
+          height: 40px;
+          line-height: 30px;
+
+          button {
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+          }
+
+          &:not([colspan]).button {
+            width: 40px;
+            padding: 0;
+
+            button {
+              @include common_button;
+              height: 30px;
+              width: 30px;
+              margin: 5px;
+              border-radius: 2px;
+
+              &.delete {
+                background: gray;
+                border: gray;
+
+                &:hover {
+                  border: darken(red, 10);
+                  background: darken(red, 10);
+                }
+              }
+            }
+          }
+
+          &[colspan] button {
+            width: 100%;
+            border: none;
+            background: none;
+            color: $roomp-color;
+            height: 40px;
+            line-height: 40px;
+          }
+        }
+      }
+
+      > div.link {
+        float: left;
+        display: block;
+        position: relative;
+        clear: both;
+        margin-left: 20px;
+        margin-bottom: 30px;
+        width: 100%;
+
+        span {
+          font-size: 14px;
+          width: 180px;
+          float: left;
+        }
+
+        input {
+          width: calc(50% - 214px);
+        }
+      }
+
+      > div {
+        float: left;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        position: relative;
+
+        table {
+          table-layout: auto;
+
+          td:first-child {
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
+          }
+        }
+
+        .map-load {
+          float: left;
+          width: 100%;
+          clear: both;
+          display: flex;
+          justify-content: flex-start;
+
+          input {
+            width: auto;
+          }
+        }
+
+        > div {
+          border-top: 1px solid $grey;
+          padding: 30px 0;
+          position: relative;
+
+          td {
+            border: none;
+            position: relative;
+
+            input, textarea {
+              width: 100%;
+
+              &[disabled] {
+                border: none;
+                background: none;
+              }
+            }
+
+            .cbutton-container {
+              position: relative;
+              float: left;
+              margin: -5px;
+
+              button {
+                margin: 5px;
+              }
+            }
+          }
+
+          h4 {
+            text-transform: uppercase;
+            font-weight: 400;
+            line-height: 2em;
+            padding: 0 2em;
+            font-size: 18px;
+            background: white;
+            position: absolute;
+            top: -1em;
+            margin: 0;
+          }
+        }
+
+        div.contacts, div.about {
+          grid-column: 1;
+          border-right: 1px solid $grey;
+        }
+
+        div.textual {
+          grid-column: 1 / 3;
+        }
+
+        > div.map {
+          grid-column: 2;
+          /* autoprefixer: off */
+          grid-row: 2/4;
+
+          div.map {
+            width: 100%;
+            padding-top: 50%;
+          }
+        }
+
+        div.photos {
+          grid-column: 1 / 3;
+
+          div.photos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            float: left;
+            width: 100%;
+            padding: 10px;
+            position: relative;
+
+            div.drag-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: rgba(0, 0, 0, 0.3);
+              z-index: 6;
+            }
+
+            &.dragover {
+              padding-bottom: 100px;
+            }
+
+            .nophoto {
+              position: relative;
+              line-height: 100px;
+              text-align: center;
+              width: 100%;
+            }
+
+            .room-photo {
+              width: 200px;
+              height: 150px;
+              background-size: cover;
+              position: relative;
+              margin: 10px;
+
+              &.active {
+                cursor: move;
+              }
+
+              &:not(.loaded):before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.3);
+                content: " ";
+              }
+
+              button {
+                display: none;
+                position: absolute;
+                top: 0;
+                right: 0;
+                @include normal_button;
+
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+
+                i {
+                  font-size: 14px;
+                  color: white;
+                }
+              }
+
+              .progress-bar {
+                transition: width .2s ease;
+                position: absolute;
+                background: rgba(255, 255, 255, 0.8);
+                top: 0;
+                right: 0;
+                height: 100%;
+              }
+
+              &.active:hover {
+                button {
+                  display: block;
+                }
+
+                &:before {
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  content: " ";
+                  position: absolute;
+                  background: rgba(0, 0, 0, 0.3);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.roomp-rates {
+      width: 100%;
+      padding: 20px;
+
+      h2 {
+        width: auto;
+        float: left;
+      }
+
+      button {
+        float: left;
+      }
+
+      .static-rates {
+        table td:first-child {
+          padding: 0;
+        }
+
+        table td.class-name {
+          padding: 0 10px;
+          text-align: center;
+        }
+
+        table td.guest-number {
+          text-align: center;
+          padding: 0 10px;
+        }
+
+        .r {
+          float: left;
+          width: 100%;
+
+          table {
+            width: auto;
+            float: left;
+            cursor: default;
+            border-collapse: collapse;
+
+            td, th {
+              border: 1px solid black;
+            }
+          }
+        }
+
+        .rates {
+          position: relative;
+          width: 100%;
+          float: left;
+        }
+
+        .dates {
+          display: grid;
+          overflow: auto;
+          width: 100%;
+          justify-content: start;
+          padding: 1px;
+
+          > div {
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            border: 1px solid lightgray;
+            margin: -1px 0 0 -1px;
+            cursor: default;
+            position: relative;
+            user-select: none;
+
+            &:not(.month) {
+
+            }
+          }
+
+          $dark-color: black;
+
+          .month {
+            grid-row: 1;
+            width: auto;
+            border-color: $dark-color;
+          }
+
+          .day-monday {
+            border-top-color: $dark-color;
+          }
+
+          .day-sunday {
+            border-bottom-color: $dark-color;
+          }
+
+          .day-saturday {
+            border-top-color: gray;
+          }
+
+          .day-last {
+            border-bottom-color: $dark-color;
+            border-right-color: $dark-color;
+          }
+
+          .day-last-week {
+            border-right-color: $dark-color;
+          }
+
+          .day-first {
+            border-top-color: $dark-color;
+            border-left-color: $dark-color;
+          }
+
+          .day-first-week {
+            border-left-color: $dark-color;
+          }
+
+          @for $i from 1 through 60 {
+            .week-#{$i} {
+              grid-column: $i;
+            }
+          }
+
+          @for $i from 1 through 7 {
+            .day-#{$i} {
+              grid-row: $i + 2;
+            }
+          }
+        }
+
+        .seasons {
+          .season {
+            float: left;
+            width: 100%;
+            margin: 1px 0;
+
+            > * {
+              float: left;
+              height: 30px;
+              line-height: 30px;
+            }
+
+            > button {
+              border: none;
+              margin-left: 20px;
+              width: 150px;
+              text-align: center;
+
+              &.start, &.apply {
+                @include common_button;
+              }
+
+              &.cancel {
+                @include ghost_button;
+              }
+            }
+
+            .cbutton-container {
+              margin-left: 40px;
+            }
+
+            input.rule {
+              width: 400px;
+            }
+          }
+        }
+      }
+
+      .dynamic-rates {
+        > * {
+          float: left;
+          clear: both;
+        }
+
+        label {
+          margin-bottom: 5px;
+
+          span {
+            width: 200px;
+            float: left;
+          }
+
+          input {
+            float: left;
+            width: 120px;
+          }
+        }
+      }
+    }
+
+    &.room {
+      padding: 20px;
+      width: 100%;
+
+      div.buttons {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: auto;
+
+        > button {
+          @include normal_button;
+          line-height: 30px;
+          min-width: 100px;
+          margin-left: 20px;
+
+          &.edit {
+            @include common_button;
+            border: 1px solid $roomp-color;
+          }
+
+          &.cancel, &.delete-reset {
+            @include ghost_button;
+          }
+
+          &.delete-check {
+            @include ghost_button;
+
+            border-color: red;
+            color: red;
+          }
+
+          &.apply {
+            margin-left: 20px;
+            @include common_button;
+          }
+
+          &.delete {
+            border: 1px red solid;
+            background-color: red;
+            color: white;
+
+            &:hover {
+              border: darken(red, 30);
+              background: darken(red, 30);
+            }
+          }
+        }
+      }
+
+      > div {
+        float: left;
+        clear: both;
+      }
+
+      div.info {
+
+        label {
+          float: left;
+          clear: both;
+          margin: 5px 0;
+
+          span {
+            width: 200px;
+            float: left;
+          }
+
+          input {
+            float: left;
+            width: 200px;
+
+            &[disabled] {
+              border: none;
+              background: none;
+            }
+          }
+        }
+      }
+
+      > div {
+        padding: 10px 0;
+        width: 100%;
+      }
+
+      h2 {
+        margin: 0 0 20px 0;
+      }
+
+      h3 {
+        margin: 0;
+        width: 200px;
+        font-size: 16px;
+        line-height: 30px;
+        float: left;
+      }
+
+      .btn-container {
+        width: calc(100% - 200px);
+        float: left;
+        margin: -5px 0 0 -5px;
+
+        button {
+          margin: 5px;
+        }
+      }
+
+      .drag-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 8;
+        border-radius: 5px;
+      }
+
+      .photos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        float: left;
+        width: 100%;
+        margin-left: -10px;
+
+        &.dragover {
+          padding-bottom: 100px;
+        }
+
+        .nophoto {
+          position: relative;
+          line-height: 100px;
+          text-align: center;
+          width: 100%;
+        }
+
+        .room-photo {
+          width: 200px;
+          height: 150px;
+          background-size: cover;
+          position: relative;
+          margin: 10px;
+
+          &.active {
+            cursor: move;
+          }
+
+          &:not(.loaded):before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            content: " ";
+          }
+
+          button {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            @include normal_button;
+
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+
+            i {
+              font-size: 14px;
+              color: white;
+            }
+          }
+
+          .progress-bar {
+            transition: width .2s ease;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            top: 0;
+            right: 0;
+            height: 100%;
+          }
+
+          &.active:hover {
+            button {
+              display: block;
+            }
+
+            &:before {
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              content: " ";
+              position: absolute;
+              background: rgba(0, 0, 0, 0.3);
+            }
+          }
+        }
+      }
+
+      .hotel-photos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        float: left;
+        width: 100%;
+        margin-left: -10px;
+
+        .photo {
+          width: 200px;
+          height: 150px;
+          background-size: cover;
+          position: relative;
+          margin: 10px;
+
+          &.active {
+            cursor: move;
+          }
+
+          &:before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.6);
+            content: " ";
+          }
+        }
+      }
+    }
+
+    &.hotels {
+      h2 {
+        float: left;
+        display: block;
+        width: auto;
+      }
+
+      > div.selector {
+        float: left;
+        border: none;
+        margin-left: 20px;
+
+        $hover-color: lighten($roomp-color, 50);
+        $usual-color: lighten($roomp-color, 70);
+        $border-color: $roomp-color;
+
+        button {
+          display: block;
+          float: left;
+          line-height: 28px;
+          background: $usual-color;
+          border: 1px solid $border-color;
+          color: $roomp-color;
+          cursor: pointer;
+          padding: 0 10px;
+          width: auto;
+          min-width: 140px;
+          margin: 0;
+          outline: none;
+
+          &:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+          }
+
+          &:not(:first-child) {
+            border-left: none;
+          }
+
+          &:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+          }
+
+          &:hover {
+            background-color: $hover-color;
+          }
+
+          &.selected, &.selected:hover {
+            background-color: $roomp-color;
+            color: white;
+          }
+        }
+      }
+
+      > a {
+        float: right;
+        font-size: 14px;
+        display: block;
+        line-height: 28px;
+        padding: 0 20px;
+        text-decoration: none;
+        margin-right: 20px;
+
+        @include ghost_button;
+
+        &:hover {
+          background-color: lighten($roomp-color, 50);
+        }
+      }
+
+      table td p {
+        max-height: 40px;
+        padding: 0;
+        margin: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      table td i.cm {
+        float: left;
+        display: inline-block;
+        padding: 0;
+        line-height: 30px;
+        margin: 10px 0 0 10px;
+        border-radius: 5px;
+        width: 10px;
+        height: 10px;
+        background: #d1d1d1;
+
+        &.exists {
+          background: red;
+        }
+
+        &.active {
+          background: $roomp-color;
+        }
+      }
+
+      table td > span {
+        float: left;
+        line-height: 30px;
+        display: block;
+      }
+
+      table td ul.popup {
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        top: 38px;
+        left: 0;
+        background: white;
+        border: 1px solid $admin-color;
+        border-top: none;
+        margin: 0;
+        padding: 0 4px;
+
+        li {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          &:not(.active) {
+            color: red;
+
+            &:before {
+              content: '- ';
+            }
+          }
+
+          &.active {
+            color: lime;
+
+            &:before {
+              content: '+ ';
+            }
+          }
+        }
+      }
+    }
+
+    &.reservations {
+      width: 100%;
+
+      h2 {
+        float: left;
+        display: block;
+        width: auto;
+      }
+
+      > a {
+        float: right;
+        font-size: 14px;
+        display: block;
+        line-height: 28px;
+        padding: 0 20px;
+        text-decoration: none;
+        margin-right: 20px;
+
+        @include ghost_button;
+
+        &:hover {
+          background-color: lighten($roomp-color, 50);
+        }
+      }
+
+      table tr td:last-child {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &.promo-codes {
+      width: 100%;
+
+      h2 {
+        float: left;
+        display: block;
+        width: auto;
+      }
+
+      > a {
+        float: right;
+        font-size: 14px;
+        display: block;
+        line-height: 28px;
+        padding: 0 20px;
+        text-decoration: none;
+        margin-right: 20px;
+
+        @include ghost_button;
+
+        &:hover {
+          background-color: lighten($roomp-color, 50);
+        }
+      }
+
+      table tr td:last-child {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      > div.selector {
+        float: left;
+        border: none;
+
+        $hover-color: lighten($roomp-color, 50);
+        $usual-color: lighten($roomp-color, 70);
+        $border-color: $roomp-color;
+
+        button {
+          display: block;
+          float: left;
+          width: 100px;
+          line-height: 28px;
+          background: $usual-color;
+          border: 1px solid $border-color;
+          color: $roomp-color;
+          cursor: pointer;
+          padding: 0;
+          outline: none;
+
+          &:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+          }
+
+          &:not(:first-child) {
+            border-left: none;
+          }
+
+          &:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+          }
+
+          &:hover {
+            background-color: $hover-color;
+          }
+
+          &.selected, &.selected:hover {
+            background-color: $roomp-color;
+            color: white;
+          }
+        }
+      }
+    }
+
+    &.promo_code {
+      width: 100%;
+
+      > div {
+        float: left;
+        position: relative;
+        padding: 0 20px;
+
+        > label, > div {
+          float: left;
+          position: relative;
+          clear: both;
+
+          margin-top: 10px;
+
+          span, input:not([type=checkbox]), select {
+            position: relative;
+            float: left;
+            margin-right: 10px;
+            line-height: 30px;
+            height: 30px;
+          }
+
+          > span {
+            width: 250px;
+          }
+
+          input:not([type=checkbox]) {
+            width: 100px;
+          }
+
+          input[type=checkbox] {
+            line-height: 30px;
+            display: block;
+            height: 30px;
+            float: left;
+            padding: 0;
+            margin: 0;
+          }
+
+          > select {
+            width: 70px;
+          }
+        }
+
+        > div.dates {
+          span {
+            float: left;
+            position: relative;
+          }
+
+          > .date_filter {
+            float: left;
+            margin: 0;
+
+            > h5 {
+              padding: 0 20px 0 0;
+              margin: 0;
+              float: left;
+              position: relative;
+              font-size: 14px;
+              line-height: 30px;
+            }
+
+            > * {
+              float: left;
+              display: block;
+              position: relative;
+            }
+
+            > select {
+              height: 30px;
+              line-height: 30px;
+            }
+
+            > div.dates {
+              padding: 0;
+              height: 30px;
+
+              a {
+                font-size: 14px;
+                text-decoration: none;
+                color: black;
+                float: left;
+                display: block;
+                line-height: 30px;
+              }
+
+              .arrow {
+                line-height: 30px;
+                padding: 0 10px;
+
+                i {
+                  line-height: 37px;
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+
+        > div.conditions {
+          > table {
+            float: left;
+            clear: both;
+
+            td, th {
+              width: 150px;
+              padding: 0 10px 10px 0;
+              vertical-align: top;
+
+              button {
+                float: right;
+                clear: both;
+                border-radius: 3px;
+
+                @include common_button;
+              }
+
+              .list {
+                float: left;
+
+                span {
+                  float: left;
+                  clear: both;
+                  white-space: nowrap;
+                  line-height: normal;
+                }
+              }
+
+              select {
+                width: 100%;
+              }
+
+              &:first-child {
+                width: 250px;
+              }
+
+              &:last-child {
+                width: 350px;
+              }
+            }
+          }
+        }
+      }
+
+      button {
+        height: 30px;
+        line-height: 30px;
+        margin: 10px 0 0 20px;
+        float: left;
+      }
+
+      > button.force {
+        width: 200px;
+        border: 1px solid $roomp-color;
+
+        @include ghost_button;
+      }
+
+      > button.apply {
+        width: 120px;
+        clear: both;
+        border: 1px solid $roomp-color;
+
+        @include common_button;
+
+        &.success {
+          background: green;
+          border: 1px solid green;
+        }
+
+        &.error {
+          background: red;
+          border: 1px solid red;
+        }
+
+        &.loading {
+          color: $roomp-color;
+          background: none;
+        }
+      }
+
+      div.activity {
+        float: left;
+
+        h3 {
+          margin: 0 0 10px 0;
+          padding: 0;
+        }
+
+        span {
+          float: left;
+          clear: both;
+        }
+
+        button {
+          clear: both;
+          margin-left: 0;
+
+          @include common_button;
+
+          &.delete {
+            border-color: red;
+            background: red;
+          }
+        }
+      }
+    }
+
+    &.reservation {
+      width: 100%;
+      padding: 20px;
+
+      h2 {
+        margin: 0 0 20px 0;
+      }
+
+      .admin_comment {
+
+        textarea {
+          width: 300px;
+          float: left;
+          height: 100px;
+
+          &:disabled {
+            background: none;
+            border: none;
+            color: black;
+          }
+        }
+
+        .controls {
+          float: left;
+          width: 100%;
+          margin-top: 20px;
+
+          button {
+            @include common_button;
+            line-height: 30px;
+            padding: 0 20px;
+            margin-right: 20px;
+            float: left;
+
+            clear: both;
+
+            &:not(:last-of-type) {
+              margin-bottom: 10px;
+            }
+
+            &.warning {
+              color: white;
+              border: red;
+              background: red;
+            }
+          }
+        }
+      }
+    }
+
+    &.availability, &.prices {
+      float: left;
+      width: 100%;
+      position: relative;
+      background: white;
+      border-radius: 4px;
+      padding: 20px;
+
+      h1 {
+        position: relative;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        margin: 0;
+      }
+
+      > button {
+        line-height: 30px;
+        width: 100px;
+        margin-top: 10px;
+
+        &.cancel {
+          @include ghost_button;
+        }
+
+        &.save {
+          @include common_button;
+          margin-right: 10px;
+        }
+      }
+
+      .meta {
+        > p {
+          font-size: 16px;
+          text-decoration: none;
+          color: black;
+          line-height: 30px;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      div.dates {
+        position: relative;
+        padding: 0;
+        display: flex;
+        float: left;
+
+        a {
+          font-size: 16px;
+          text-decoration: none;
+          color: black;
+          line-height: 30px;
+        }
+
+        .arrow {
+          line-height: 34px;
+          height: 30px;
+          padding: 0 10px;
+
+          i {
+            line-height: 30px;
+          }
+        }
+      }
+
+      .data {
+        display: grid;
+        grid-template-columns: 250px calc(100% - 250px);
+        width: 100%;
+
+        .rooms {
+          width: 400px;
+          margin-top: 26px;
+          grid-row: 1;
+          grid-column: 1;
+        }
+
+        .rows {
+          grid-row: 1;
+          grid-column: 2;
+          overflow: auto;
+        }
+      }
+
+      .rows {
+        padding-bottom: 2px;
+      }
+
+      .row {
+        float: left;
+        position: relative;
+        display: flex;
+        margin: -1px 1px;
+        clear: both;
+        height: 30px;
+
+        &:nth-of-type(2) .cell:first-of-type {
+          border-top-left-radius: 4px;
+        }
+        &:nth-of-type(2) .cell:last-of-type {
+          border-top-right-radius: 4px;
+        }
+        &:last-of-type .cell:first-of-type {
+          border-bottom-left-radius: 4px;
+        }
+        &:last-of-type .cell:last-of-type {
+          border-bottom-right-radius: 4px;
+        }
+
+        > div {
+          line-height: 30px;
+          height: 30px;
+          float: left;
+        }
+
+        > div.room {
+          width: 400px;
+        }
+
+        > div.cell, input.cell {
+          float: left;
+          height: 30px;
+
+          width: 50px;
+          flex: 0 0 50px;
+          margin: -1px 0 0 -1px;
+          text-align: center;
+
+          &.day {
+            border: 1px solid $admin-color;
+            display: block;
+            outline: none;
+
+            &:hover {
+              box-shadow: inset 0 0 9px -4px darken($admin-color, 10);
+            }
+
+            &:focus {
+              box-shadow: inset 0 0 9px -4px darken($admin-color, 20);
+            }
+          }
+        }
+      }
+    }
+
+    &.prices {
+      .meta {
+        float: left;
+
+        p {
+          float: left;
+          clear: both;
+        }
+
+        > .dates {
+          clear: both;
+        }
+      }
+
+      .channel-toggle {
+        float: left;
+        margin-left: 100px;
+
+        button {
+          line-height: 30px;
+          margin: 0;
+          padding: 0;
+          display: block;
+          float: left;
+          width: 100px;
+          margin-left: -1px;
+
+          @include ghost_button;
+
+          &.selected {
+            @include common_button;
+            border: 1px solid $roomp-color;
+          }
+
+          &:first-child {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+          }
+
+          &:last-child {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+          }
+        }
+      }
+
+      .data .rooms {
+        width: auto;
+
+        .row {
+          width: 100%;
+          display: block;
+          padding: 0 40px 0 0;
+
+          div {
+            display: block;
+          }
+
+          .room {
+            float: left;
+            width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .occupancy {
+            float: right;
+
+            width: 65px;
+          }
+        }
+      }
+    }
+
+    &.new-reservation {
+      font-size: 14px;
+      width: 100%;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      > div > select {
+        margin-left: 20px;
+      }
+
+      table {
+        table-layout: auto;
+      }
+
+      .scrollable_select {
+        display: block;
+        float: left;
+        line-height: 25px;
+        position: relative;
+        margin-left: 20px;
+        float: left;
+        width: 300px;
+        clear: both;
+
+        input {
+          width: 100%;
+        }
+
+        label {
+          display: block;
+          cursor: pointer;
+          padding: 0 10px;
+
+          &:hover {
+            color: #304090;
+          }
+        }
+
+        i {
+          float: right;
+          line-height: 30px;
+        }
+
+        .menu {
+          width: 100%;
+          margin-top: -1px;
+          border: 1px solid #999;
+          top: 100%;
+          position: absolute;
+          background: #ffffff;
+          padding: 0 10px;
+          z-index: 10;
+          max-height: 25px * 5;
+          overflow: hidden;
+
+          .scrollbar {
+            position: absolute;
+            right: 2px;
+            width: 3px;
+            background: #eaeaea;
+            height: 20px;
+          }
+        }
+
+        .menu a {
+          width: 100%;
+          float: left;
+          clear: both;
+          cursor: pointer;
+          font-size: inherit;
+          white-space: nowrap;
+
+          &.disabled {
+            color: gray;
+            cursor: default;
+          }
+
+          &:not(.disabled):hover {
+            background: rgb(240, 240, 240);
+          }
+
+          &.disabled:hover {
+            background: none;
+          }
+        }
+      }
+
+      .module {
+        display: grid;
+        float: left;
+        width: 100%;
+        clear: both;
+        grid-template-columns: 400px 400px;
+        grid-column-gap: 20px;
+
+        .availability {
+          grid-row: 1;
+          grid-column: 1 / 3;
+        }
+
+        .dates {
+          grid-column: 1;
+          grid-row: 2;
+        }
+
+        .policy {
+          grid-column: 2;
+          grid-row: 2;
+
+          h5 {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+          }
+
+          p {
+            line-height: 18px;
+            display: block;
+            padding: 0;
+            margin: 0;
+
+            &.name {
+              float: left;
+              width: 80%;
+            }
+
+            &.value {
+              width: 20%;
+              float: right;
+            }
+          }
+        }
+
+        .rooms {
+          grid-column: 1;
+          grid-row: 3;
+          margin-bottom: 20px;
+
+          .room {
+            width: 100%;
+            float: left;
+          }
+        }
+
+        .rooms_selected {
+          grid-column: 1 / 3;
+          grid-row: 4;
+
+          input {
+            width: 70px;
+
+            &:disabled {
+              color: black;
+              background: none;
+              border: 1px solid rgba(0, 0, 0, 0);
+            }
+          }
+
+          .room {
+            float: left;
+            width: 100%;
+            padding: 0 40px 0 0;
+            margin-bottom: 20px;
+
+            > div {
+              float: left;
+              width: 100%;
+
+              label {
+                float: left;
+              }
+
+              select {
+                float: right;
+              }
+            }
+          }
+        }
+
+        .guest_data {
+          grid-row: 3;
+          grid-column: 2;
+
+          input, textarea {
+            line-height: 30px;
+            padding: 0 10px;
+            width: 300px;
+            float: left;
+            clear: both;
+            margin-top: 10px;
+          }
+        }
+
+        .controls {
+          margin-top: 20px;
+          grid-row: 5;
+          grid-column: 1 / 3;
+
+          .total {
+            padding: 0 20px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 600;
+          }
+
+          button {
+            @include common_button;
+
+            line-height: 30px;
+            padding: 0 10px;
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .dates {
+        position: relative;
+        float: left;
+        padding: 0 20px;
+        width: 100%;
+
+        .placeholder {
+          width: 100%;
+          text-align: center;
+          height: 40px;
+          line-height: 40px;
+          font-size: 14px;
+        }
+
+        .form {
+          border: 1px solid $booking-alternate;
+          display: flex;
+          border-radius: 2px;
+          float: left;
+          width: 100%;
+          height: 50px;
+          padding: 5px;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+
+          .from, .till {
+            position: absolute;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+
+            &:hover a {
+              text-decoration: underline;
+            }
+          }
+
+          .from {
+            border-right: 1px solid $booking-alternate;
+            left: 0;
+          }
+
+          .till {
+            left: 50%;
+
+          }
+
+          a {
+            font-size: 13px;
+            text-decoration: none;
+
+            &.date {
+              color: $roomp-color;
+            }
+
+            &.day {
+              color: $booking-color;
+            }
+          }
+
+          span.nights {
+            background-color: white;
+            font-size: 13px;
+            line-height: 16px;
+            color: $booking-color;
+            cursor: pointer;
+            z-index: 5;
+          }
+        }
+      }
+    }
+
+    &.integrations {
+      width: 100%;
+
+      div.integrations-table {
+        display: grid;
+      }
+
+      > .switcher {
+        float: left;
+        clear: both;
+        margin-left: 20px;
+        margin-bottom: 20px;
+
+        button {
+          margin: 0;
+          float: left;
+          border: 1px solid $roomp-color;
+          background: white;
+          color: $roomp-color;
+
+          &:first-of-type {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+          }
+
+          &:last-of-type {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+          }
+
+          &:not(.active):hover {
+            background: lighten($roomp-color, 50);
+          }
+
+          &.active {
+            background: $roomp-color;
+            color: white;
+          }
+        }
+      }
+
+      > .controls {
+        width: 100%;
+        float: left;
+        padding-left: 20px;
+        margin-top: 20px;
+        border-top: 1px solid $booking-alternate;
+
+        > * {
+          float: left;
+          clear: both;
+          margin-top: 20px;
+        }
+      }
+
+      button {
+        @include common_button;
+
+        line-height: 30px;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      div.ostrovok_hotels {
+        width: 600px;
+
+        h5 {
+          font-size: 14px;
+          text-transform: uppercase;
+          margin: 0 20px;
+          padding: 0;
+        }
+
+        tr button {
+          line-height: normal;
+          background: none;
+          height: auto;
+          border: none;
+          color: black;
+        }
+      }
+
+      .admin-channels-overlay {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+
+        &:before {
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        @include image_overlay;
+
+        .card {
+          max-height: 80%;
+          overflow-x: hidden;
+          overflow-y: auto;
+
+          table {
+            width: auto;
+            min-width: 500px;
+          }
+        }
+      }
+
+      div.booking_integration {
+        float: left;
+        width: 100%;
+        position: relative;
+
+        h5 {
+          margin: 0 20px 20px 20px;
+          text-transform: uppercase;
+          font-size: 14px;
+          width: 100%;
+          text-align: left;
+          font-weight: 500;
+          line-height: 24px;
+        }
+
+        div.ota {
+          float: left;
+          width: 100%;
+          position: relative;
+          padding: 0 20px;
+
+          p {
+            margin: 0;
+            padding: 0;
+
+            &.warning {
+              color: red;
+            }
+          }
+
+          > div {
+            float: left;
+            width: 100%;
+            position: relative;
+          }
+
+          div.mapping {
+            > button.channel_reset {
+              float: left;
+              clear: both;
+              margin: 10px 0;
+              background: white;
+              border: 1px solid $roomp-color;
+
+              @include ghost_button;
+
+              &:hover {
+                background: lighten($roomp-color, 50);
+              }
+            }
+
+            div.upload_rooms {
+              width: 60%;
+              float: left;
+              clear: both;
+              padding: 10px 0;
+
+              p, button {
+                float: right;
+                line-height: 30px;
+              }
+
+              p {
+                margin: 0 10px;
+              }
+
+              button:not(.highlighted):not(.sync) {
+                background: white;
+                color: $roomp-color;
+                border: 1px solid $roomp-color;
+              }
+
+              button.sync {
+                @include common_button;
+                float: left;
+              }
+            }
+
+            div.mappings, div.rate-mappings {
+              width: 60%;
+              float: left;
+              display: grid;
+              margin-top: 10px;
+
+              > button {
+                width: 300px;
+                margin: 10px 0;
+              }
+
+              .th-booking {
+                grid-column: 1;
+                grid-row: 1;
+                margin-bottom: 5px;
+              }
+
+              .th-roomp {
+                grid-column: 2;
+                grid-row: 1;
+                margin-bottom: 5px;
+              }
+
+              .tr {
+                height: 30px;
+                grid-column: 1/3;
+
+                span, select {
+                  float: left;
+                  width: 50%;
+                  height: 30px;
+                  line-height: 30px;
+                }
+              }
+            }
+
+            div.rate-mappings {
+              grid-template-columns: 40% 30% 30%;
+
+              .tr {
+                grid-column: 1/4;
+                span {
+                  width: 40%;
+                }
+                select {
+                  width: 30%;
+                }
+              }
+            }
+
+            div.controls {
+              width: 100%;
+              float: left;
+              margin-top: 10px;
+
+              button {
+                &.success {
+                  background: green;
+                }
+
+                &.loading {
+                  background: lighten($roomp-color, 10);
+                }
+
+                &.error {
+                  background: red;
+                }
+              }
+            }
+          }
+        }
+
+        div.premium_program {
+          float: left;
+          clear: both;
+          margin: 20px 20px 0;
+
+          input[type=checkbox] {
+            margin: 0 10px 0 0;
+          }
+
+          label, input {
+            line-height: 30px;
+          }
+
+          button {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      div.ostrovok_integration {
+        float: left;
+        width: 100%;
+        position: relative;
+
+        h5 {
+          margin: 0 20px 20px 20px;
+          text-transform: uppercase;
+          font-size: 14px;
+          width: 100%;
+          text-align: left;
+          font-weight: 500;
+          line-height: 24px;
+        }
+
+        .ota {
+          float: left;
+          width: 100%;
+          position: relative;
+          padding: 0 20px;
+
+          div.hotel {
+            float: left;
+            width: 50%;
+            position: relative;
+            padding-bottom: 20px;
+
+            p {
+              float: left;
+              padding: 0;
+              margin: 0;
+            }
+
+            p, button {
+              line-height: 30px;
+              height: 30px;
+            }
+
+            button.select_hotel {
+              float: right;
+            }
+
+            button.apply {
+              margin-top: 10px;
+            }
+
+            button.delete_connection {
+              margin-top: 10px;
+              float: right;
+              clear: both;
+
+              background: white;
+              border: 1px solid $roomp-color;
+              color: $roomp-color;
+
+              &:hover {
+                background: lighten($roomp-color, 50);
+              }
+            }
+          }
+
+          div.rooms {
+            float: left;
+            width: 100%;
+            position: relative;
+
+            div.mappings {
+              width: 85%;
+              float: left;
+              display: grid;
+
+              .th-booking {
+                grid-column: 1;
+                grid-row: 1;
+                margin-bottom: 5px;
+              }
+
+              .th-roomp {
+                grid-column: 2;
+                grid-row: 1;
+                margin-bottom: 5px;
+              }
+
+              .tr {
+                height: 30px;
+                grid-column: 1/3;
+
+                span, select {
+                  float: left;
+                  width: 50%;
+                  height: 30px;
+                  line-height: 30px;
+                }
+              }
+            }
+
+            > button {
+              float: left;
+              clear: both;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    &.policies {
+      width: 100%;
+
+      > div {
+        display: grid;
+        grid-template-columns: 300px 200px 300px;
+        margin: 0 20px;
+
+        span {
+          padding: 0 5px;
+        }
+
+        h3 {
+          grid-column: 1/3;
+        }
+
+        label {
+          &.beds {
+            grid-column: 1 / 3;
+          }
+
+          &.check {
+            grid-column: 1;
+          }
+
+          &.price {
+            grid-column: 2;
+          }
+
+          &.age {
+            grid-column: 3;
+          }
+        }
+      }
+
+      .last_minute {
+        width: 100%;
+        display: block;
+
+        table {
+          width: auto;
+          table-layout: auto;
+
+          th {
+            &:first-child {
+              width: 130px;
+            }
+
+            text-align: center;
+          }
+
+          td {
+            vertical-align: middle;
+            text-align: center;
+
+            > * {
+              display: inline-block;
+            }
+
+            input {
+              width: 50px;
+            }
+          }
+        }
+      }
+
+      > button {
+        @include common_button;
+
+        line-height: 30px;
+        min-width: 120px;
+        margin: 10px 20px 0;
+
+        &.busy {
+          @include ghost_button;
+        }
+      }
+    }
+
+    &.requisites {
+      width: 100%;
+      div {
+        width: 50%;
+        float: left;
+        padding: 0 20px;
+
+        > button {
+          @include common_button;
+
+          float: left;
+          clear: both;
+          line-height: 30px;
+          margin: 10px 0;
+        }
+
+        &.controls {
+          width: 100%;
+          margin-top: 10px;
+
+          button {
+            line-height: 30px;
+            width: 120px;
+            border: 1px solid $roomp-color;
+            margin-right: 20px;
+
+            &.apply {
+              @include common_button;
+            }
+
+            &.cancel, &.loading {
+              @include ghost_button;
+
+              &:hover {
+                background: lighten($roomp-color, 50);
+              }
+            }
+
+            &.success {
+              @include common_button;
+              background: green;
+              border: 1px solid green;
+            }
+
+            &.error {
+              @include common_button;
+              background: red;
+              border: 1px solid red;
+            }
+          }
+        }
+
+        h3 {
+          margin: 0;
+          padding: 0;
+        }
+
+        label {
+          float: left;
+          clear: both;
+          margin-top: 5px;
+          display: flex;
+          justify-content: space-between;
+          align-items: self-start;
+          width: 500px;
+
+          span {
+
+          }
+
+          p {
+            flex: 0 1 200px;
+            margin: 0;
+            padding: 0;
+          }
+
+          a {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            flex: 0 0 200px;
+          }
+
+          input {
+            flex: 0 1 200px;
+          }
+        }
+      }
+    }
+
+    &.reservation-occupancies {
+      .card-content {
+        padding: 0 20px;
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+
+        > table {
+          margin: 10px 0;
+
+          > tr:last-child td {
+            font-weight: 600;
+          }
+        }
+
+        th {
+          text-align: left;
+        }
+
+        td, th {
+          vertical-align: top;
+
+          > input {
+            width: 100%;
+            float: left;
+          }
+
+          &.adults, &.infants, &.children {
+            width: 100px;
+          }
+
+          &.rates, &.price {
+            table {
+              table-layout: fixed;
+
+              td {
+                white-space: nowrap;
+              }
+
+              td:first-child {
+                width: 80px;
+              }
+
+              input {
+                width: 100%;
+              }
+            }
+          }
+
+          &.rates {
+            width: 350px;
+          }
+
+          &.price {
+            width: 235px;
+          }
+
+          &.room, &.roomp-rates {
+            width: 150px;
+          }
+
+          &.buttons {
+            width: 200px;
+
+            button {
+              float: left;
+              clear: both;
+            }
+          }
+
+          input {
+            &:disabled {
+              border: none;
+              background: none;
+            }
+          }
+        }
+      }
+    }
+
+    &.select_list {
+      width: 500px;
+
+      table tr.selected td {
+        background: lighten($admin-color, 5);
+      }
+    }
+
+    &.business_developers {
+      h2 {
+        float: left;
+        display: block;
+        width: auto;
+      }
+
+      > a {
+        float: right;
+        font-size: 14px;
+        display: block;
+        line-height: 28px;
+        padding: 0 20px;
+        text-decoration: none;
+        margin-right: 20px;
+
+        @include ghost_button;
+
+        &:hover {
+          background-color: lighten($roomp-color, 50);
+        }
+      }
+    }
+
+    &.business_developer {
+      > div {
+        padding: 0 20px;
+
+        > div {
+          width: 500px;
+          float: left;
+          clear: both;
+
+          height: 30px;
+          line-height: 30px;
+          margin-bottom: 10px;
+
+          label {
+            width: 200px;
+            float: left;
+          }
+
+          input {
+            width: 200px;
+            float: left;
+            height: 30px;
+          }
+        }
+      }
+    }
+
+    &.offer {
+      width: 100%;
+      padding: 20px;
+
+      h2 {
+        margin-left: 0;
+      }
+
+      button {
+        line-height: 30px;
+        width: 230px;
+        float: left;
+
+        @include common_button;
+
+        clear: both;
+        margin: 10px 10px 10px 0;
+      }
+
+      p {
+        float: left;
+        clear: both;
+        margin: 0;
+      }
+    }
+
+    &.logs {
+      width: 100%;
+      padding: 20px;
+
+      h2 {
+        margin: 0 0 20px 0;
+      }
+
+      table {
+        width: 100%;
+
+        tr.row {
+          td {
+            &:first-child {
+              width: 80px;
+            }
+
+            &:nth-child(2) {
+              width: 120px;
+            }
+
+            &:nth-child(3) {
+            }
+          }
+        }
+
+        tr:last-child td {
+          padding-top: 10px;
+          vertical-align: top;
+        }
+
+        textarea {
+          width: calc(100% - 120px);
+          float: left;
+          position: relative;
+        }
+
+        button {
+          @include common_button;
+          width: 120px;
+          line-height: 28px;
+          float: left;
+          position: relative;
+        }
+      }
+    }
+
+    button.button {
+      @include normal_button;
+      line-height: 30px;
+      min-width: 100px;
+      margin-right: 20px;
+
+      &.edit {
+        @include common_button;
+        border: 1px solid $roomp-color;
+      }
+
+      &.cancel, &.delete-reset {
+        @include ghost_button;
+        border: 1px solid $roomp-color;
+      }
+
+      &.delete-check {
+        @include ghost_button;
+
+        border-color: red;
+        color: red;
+      }
+
+      &.apply {
+        @include common_button;
+      }
+
+      &.delete {
+        border: 1px red solid;
+        background-color: red;
+        color: white;
+
+        &:hover {
+          border: darken(red, 30);
+          background: darken(red, 30);
+        }
+      }
+    }
+
+    table:not(.bare) {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+
+      &:not(.plain) {
+        cursor: pointer;
+
+        tr:hover td {
+          background-color: #DCF1FA;
+        }
+      }
+
+      td {
+        border-top: 1px solid $admin-color;
+        height: 60px;
+      }
+
+      th {
+        height: 40px;
+        font-weight: 500;
+
+        .filter {
+          input {
+            height: 26px;
+            @include placeholder {
+              font-size: 14px;
+              font-weight: 500;
+              color: $admin-font-color;
+            }
+          }
+
+          button {
+            @include normal_button;
+
+            background: none;
+          }
+        }
+      }
+
+      td, th {
+        text-align: left;
+        font-size: 14px;
+        padding-right: 10px;
+
+        &:first-child {
+          padding-left: 20px;
+        }
+      }
+    }
+  }
+}

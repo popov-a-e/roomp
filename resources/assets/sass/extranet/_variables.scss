@@ -1,0 +1,11 @@
+@import '../_variables';
+
+$page-width: 1080px;
+
+@mixin noprint {
+  @media print {
+    & {
+      /*display: none;*/
+    }
+  }
+}

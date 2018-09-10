@@ -1,9 +1,9 @@
 <?php
 
 return [
-  'default' => env('FILESYSTEM_DRIVER', 'local'),
+  'default' => env('FILE_DRIVER', 'local'),
 
-  'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+  'cloud' => env('FILE_CLOUD', 's3'),
 
   'disks' => [
 
@@ -28,6 +28,21 @@ return [
       'url' => env('AWS_URL'),
     ],
 
+    'dev' => [
+      'driver' => 's3',
+      'key' => env('AWS_KEY'),
+      'secret' => env('AWS_SECRET'),
+      'region' => env('AWS_REGION'),
+      'bucket' => 'roomp-dev',
+    ],
+
+    'prod' => [
+      'driver' => 's3',
+      'key' => env('AWS_KEY'),
+      'secret' => env('AWS_SECRET'),
+      'region' => env('AWS_REGION'),
+      'bucket' => 'roomp-prod',
+    ],
   ],
 
 ];

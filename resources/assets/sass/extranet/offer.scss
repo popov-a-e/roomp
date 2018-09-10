@@ -1,0 +1,217 @@
+@import './_variables';
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+$header-height: 70px;
+
+main {
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #eaeaea;
+
+  > .header-container {
+    width: 100%;
+    height: $header-height;
+    display: block;
+    float: left;
+    background: white;
+    flex: 0 1 $header-height;
+
+    header {
+      width: 1440px;
+      margin: 0 auto;
+      height: $header-height;
+      display: block;
+
+      @include noprint;
+
+      img {
+        height: 30px;
+        margin: ($header-height - 30px) / 2;
+        float: left;
+      }
+
+      a.logo {
+        width: 200px;
+        height: 100%;
+        float: left;
+        background: #{cdn('/img/logo.png')} center 60% no-repeat;
+        background-size: 50%;
+      }
+
+      > div.hotel-selector {
+        position: relative;
+        float: right;
+        width: 300px;
+        height: 100%;
+        cursor: pointer;
+
+        &, * {
+          user-select: none;
+        }
+
+        > span {
+          width: 100%;
+          float: left;
+          text-align: center;
+          font-weight: bolder;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          padding: 0 5px;
+          line-height: $header-height;
+          height: 100%;
+          color: $roomp-color;
+          border-right: 1px solid $grey;
+          border-left: 1px solid $grey;
+        }
+
+        > div {
+          position: absolute;
+          width: 100%;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          border-radius: 3px;
+          top: 100%;
+          left: 0;
+          z-index: 255;
+
+          > div {
+            height: 40px;
+            line-height: 40px;
+            border-top: 1px solid $grey;
+            text-align: center;
+          }
+
+          > a {
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid $grey;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: $roomp-color;
+            padding: 0 5px;
+
+            width: 100%;
+
+            &:not(:last-child) {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > .content {
+    height: calc(100vh - #{$header-height});
+    position: relative;
+    float: left;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eaeaea;
+
+    $form-width: 600px;
+    $form-padding: 80px;
+    $button-width: 150px;
+
+    > form {
+      width: 600px;
+      height: auto;
+      background: white;
+      border-radius: 4px;
+
+      > h1 {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        font-size: 16px;
+        text-align: center;
+        color: $roomp-color;
+        margin: 0;
+        padding: 0;
+        float: left;
+        clear: both;
+        border-bottom: 1px solid #eaeaea;
+      }
+
+      > div {
+        float: left;
+        padding: 40px 80px;
+        clear: both;
+        width: 100%;
+
+        > * {
+          float: left;
+          clear: both;
+          display: block;
+        }
+
+        > label {
+          width: 100%;
+          margin-bottom: 20px;
+
+          > span, input {
+            display: block;
+            float: left;
+            width: 50%;
+            height: 34px;
+            line-height: 30px;
+            padding: 2px 5px;
+          }
+
+          span {
+
+          }
+
+          input {
+            border: 1px solid #eaeaea;
+            border-radius: 2px;
+          }
+        }
+
+        > p {
+          text-align: center;
+          width: 100%;
+
+          input {
+            margin-right: 5px;
+          }
+        }
+
+        > button {
+          position: relative;
+          line-height: 30px;
+          width: $button-width;
+          border-radius: 2px;
+          margin-left: $form-width / 2 - $form-padding - $button-width / 2;
+
+          @include common_button;
+
+          &[disabled]:not(.loading), &[disabled]:not(.loading):hover {
+            background: gray;
+            border: gray;
+          }
+        }
+      }
+    }
+  }
+}

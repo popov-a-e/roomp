@@ -1,0 +1,429 @@
+@import './modules/header';
+@import './modules/datepicker';
+
+@mixin cbutton {
+  & {
+    -webkit-appearance: none;
+    border: none;
+    outline: none !important;
+    background: #ececec;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 12px;
+
+    &:not([disabled]) {
+      &:hover {
+        background: #e0e0e0;
+      }
+
+      &.active {
+        background: #304090;
+        color: white;
+
+        &:hover {
+          background: #24306d;
+        }
+      }
+    }
+
+    &[disabled] {
+      background: rgba(236, 236, 236, 0.5);
+
+      &.active {
+        background: rgba(48, 64, 144, 0.5);
+        color: white;
+      }
+    }
+  }
+
+  &.active {
+    background: #304090;
+    color: white;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  padding: $header-height $margin-small $margin-small;
+
+  .overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+
+    @include image_overlay;
+
+    &:before {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .content {
+      width: 300px;
+      background: white;
+      position: relative;
+
+      &.guests_dialog {
+        padding: 10px;
+
+        h4 {
+          text-align: center;
+          margin: 0;
+          padding: 0;
+          font-weight: 400;
+          font-size: 16px;
+        }
+
+        > div {
+          float: left;
+          width: 100%;
+
+          &.children_ages {
+            label {
+              width: auto;
+
+              span {
+                padding-right: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .hotels {
+    z-index: 4;
+    flex: 1;
+    padding-bottom: 40px;
+
+    .hotel {
+      &:before {
+        padding-top: 45%;
+      }
+      margin-top: $margin-small;
+    }
+
+    .empty {
+      height: calc(100vh - 220px);
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .flying-man {
+        width: 80%;
+        height: auto;
+        opacity: 0.15;
+      }
+
+      .text {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .controls {
+        display: flex;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        button {
+          @include cbutton;
+          margin-bottom: 10px !important;
+        }
+      }
+    }
+  }
+
+  .filters {
+    z-index: 4;
+    position: relative;
+    float: left;
+    width: 100%;
+
+    .dates-filter {
+      position: relative;
+      float: left;
+      width: 100%;
+      border-top: 1px solid $booking-alternate;
+      border-bottom: 1px solid $booking-alternate;
+
+      .form {
+        display: flex;
+        float: left;
+        width: 100%;
+        height: 50px;
+        padding: 5px;
+        justify-content: center;
+        align-items: center;
+
+        .from, .till {
+          position: absolute;
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-content: center;
+          align-items: center;
+        }
+
+        .from {
+          border-right: 1px solid $booking-alternate;
+          left: 0;
+        }
+
+        .till {
+          left: 50%;
+
+        }
+
+        a {
+          font-size: 13px;
+          text-decoration: none;
+
+          &.date {
+            color: $roomp-color;
+          }
+
+          &.day {
+            color: $booking-color;
+          }
+        }
+
+        span.nights {
+          background-color: white;
+          font-size: 13px;
+          line-height: 16px;
+          color: $booking-color;
+          cursor: pointer;
+          z-index: 100;
+        }
+      }
+    }
+
+    .full-filters {
+      padding: 0 10px 40px;
+      width: 100%;
+      float: left;
+
+      > nav {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        background: white;
+        z-index: 5;
+        box-shadow: 0 0 4px 1px #d1d1d1;
+
+        > button {
+          border: none;
+          margin: 0;
+          flex: 1;
+          background: none;
+          line-height: 40px;
+          height: 40px;
+          border-top: 1px solid $booking-alternate;
+          outline: none;
+
+          &:active {
+            background: #e1e1e1;
+          }
+
+          &:first-child {
+            @include common_button;
+          }
+
+          &:last-child {
+            border-left: 1px solid $booking-alternate;
+          }
+        }
+      }
+
+      > div {
+        width: 100%;
+        float: left;
+        padding: 0;
+
+        > h2 {
+          margin: 10px 0;
+          width: 100%;
+          font-size: 14px;
+          text-transform: uppercase;
+          color: #304090;
+          float: left;
+          display: block;
+        }
+
+        > div {
+          width: 100%;
+          float: left;
+
+          button {
+            margin: 0 10px 10px 0;
+          }
+        }
+
+        hr {
+          width: 100%;
+          float: left;
+          border: none;
+          border-top: 1px solid $booking-alternate;
+        }
+      }
+
+      .allotments {
+        .guest_selector {
+          width: calc(100% + 20px);
+          float: left;
+          text-align: center;
+          line-height: 40px;
+          font-size: 14px;
+          color: $roomp-color;
+          margin: 0 -10px;
+          border-bottom: 1px solid $booking-alternate;
+
+        }
+
+        > div {
+          width: 100%;
+          float: left;
+
+          > label {
+            margin-top: 5px;
+            width: 50%;
+
+            > span {
+              font-size: 14px;
+            }
+
+            i {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      .price {
+        width: 100%;
+
+        &, * {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          -webkit-tap-highlight-color: black;
+          cursor: default;
+        }
+
+        .handler {
+          width: 24px;
+          height: 24px;
+          border-radius: 12px;
+          top: 4px;
+
+          &.active {
+            background: $roomp-color;
+            border-color: $roomp-color;
+          }
+
+          &.left {
+            margin-left: -12px;
+          }
+
+          &.right {
+            margin-left: calc(100% - 12px);
+          }
+        }
+
+        .slider {
+          width: calc(100% - 24px);
+          margin-left: 12px;
+        }
+      }
+    }
+
+    > nav {
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      background: white;
+      z-index: 5;
+      box-shadow: 0 0 4px 1px #d1d1d1;
+
+      .sort {
+        position: absolute;
+        bottom: 40px;
+        height: 40px;
+        left: 0;
+        display: flex;
+        width: 100%;
+        box-shadow: 0 0 4px 1px #d1d1d1;
+
+        > button {
+          height: 40px;
+          line-height: 40px;
+          margin: 0;
+          flex: 1;
+          padding: 0 5px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          background: white;
+
+          &:not(:first-child) {
+            border-left: 1px solid $booking-alternate;
+          }
+        }
+      }
+
+      > button {
+        border: none;
+        margin: 0;
+        flex: 1;
+        background: none;
+        line-height: 40px;
+        height: 40px;
+        border-top: 1px solid $booking-alternate;
+        outline: none;
+
+        &:active {
+          background: #e1e1e1;
+        }
+
+        &:last-of-type {
+          border-left: 1px solid $booking-alternate;
+        }
+      }
+    }
+  }
+}

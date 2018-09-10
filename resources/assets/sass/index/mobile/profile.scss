@@ -1,0 +1,225 @@
+@import './modules/header';
+
+body, html {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+body {
+  width: 100%;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  margin-top: $header-height;
+
+  padding: 0 20px 20px 20px;
+
+  h1 {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #304090;
+  }
+
+  .tabs {
+    width: 100%;
+    float: left;
+    background: white;
+
+    .user-info {
+      > * {
+        width: 100%;
+        float: left;
+
+        > div {
+          width: 100%;
+          display: flex;
+          margin-bottom: 10px;
+
+          > span {
+            width: 120px;
+            float: left;
+            display: block;
+            line-height: 40px;
+            flex: 0 0 120px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+
+          > div {
+            flex: 1;
+            float: left;
+            display: block;
+          }
+
+          input:not([type=radio]) {
+            line-height: 40px;
+            height: 40px;
+            padding-left: 10px;
+            font-size: 14px;
+            width: 100%;
+          }
+
+          input[type=radio] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            padding: 0;
+            line-height: 30px;
+          }
+
+          &.sex {
+            > div {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            label {
+              width: calc(50% - 5px);
+              float: left;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              &:first-child {
+                margin-right: 10px;
+              }
+
+              input, span {
+                float: left;
+                display: block;
+              }
+            }
+          }
+
+          &.birthday {
+            > div {
+              display: flex;
+              align-items: stretch;
+              justify-content: center;
+
+              select {
+                background: none;
+                flex: 1;
+              }
+            }
+          }
+
+          .countryinput {
+            height: 40px;
+            line-height: 40px;
+            margin: 0;
+
+            .country-selected {
+              height: 40px;
+              line-height: 40px;
+              width: 50px;
+            }
+
+            input {
+              width: calc(100% - 50px) !important;
+            }
+          }
+        }
+      }
+
+      button {
+        @include common_button;
+        line-height: 40px;
+        float: left;
+        width: calc(100% - 120px);
+        margin: 10px 0 10px 120px;
+      }
+
+      h1 {
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 0;
+        font-size: 20px;
+      }
+    }
+
+    .reservations {
+      h1 {
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 0;
+        font-size: 20px;
+      }
+
+      .table-container {
+        float: left;
+        position: relative;
+        width: 100%;
+        overflow: scroll;
+      }
+
+      table {
+        width: 100%;
+
+        th {
+          text-align: left;
+          border-bottom: 1px solid $roomp-color;
+        }
+
+        th, td {
+          padding: 5px;
+        }
+      }
+    }
+  }
+
+  > nav {
+    float: left;
+    width: 100%;
+    margin-bottom:10px;
+
+    a {
+      float: left;
+      padding: 10px;
+      text-decoration: none;
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+
+      -webkit-appearance: none;
+      border: none;
+      outline: none !important;
+      background: #ececec;
+      cursor: default;
+      font-size: 12px;
+
+      &:not([disabled]) {
+        &:hover {
+          background: #e0e0e0;
+        }
+
+        &.active, &.router-link-exact-active {
+          background: #304090;
+          color: white;
+
+          &:hover {
+            background: #24306d;
+          }
+        }
+      }
+
+      &[disabled] {
+        background: rgba(236, 236, 236, 0.5);
+
+        &.active {
+          background: rgba(48, 64, 144, 0.5);
+          color: white;
+        }
+      }
+    }
+  }
+}

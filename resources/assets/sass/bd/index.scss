@@ -1,0 +1,907 @@
+@import './_variables';
+@import './modules/header';
+@import './modules/sidebar';
+
+$bd-color: #E2E4E7;
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  &.fixed {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+.v-input {
+  width: 100%;
+  position: relative;
+  display: block;
+  float: left;
+
+  &.v-input-cancelable {
+    span {
+      cursor: pointer;
+
+      i {
+        color: grey;
+      }
+    }
+
+    input, p {
+      width: 90%;
+      border: none;
+      background-color: white;
+      outline-width: 0;
+      float: left;
+      display: block;
+      font-size: 16px;
+      color: black;
+      line-height: 30px;
+    }
+
+    input:focus {
+      background-color: white;
+    }
+
+    input + i {
+      display: none;
+      position: absolute;
+      right: 24px;
+      top: 17px;
+      line-height: 30px;
+      color: rgba(0,0,0,0);
+      transition: color .2s ease;
+
+      &:hover {
+        color: rgba(0,0,0,1);
+      }
+    }
+
+    input:focus + i, input + i:hover {
+      display: block;
+    }
+  }
+}
+
+.v-select {
+  width: 100%;
+  position: relative;
+  display: block;
+  float: left;
+
+  select {
+    border: none;
+    background-color: white;
+    outline-width: 0;
+    float: left;
+    display: block;
+    font-size: 16px;
+    color: black;
+    line-height: 30px;
+  }
+}
+
+.v-input, .v-select {
+  &.highlighted {
+    color: red;
+  }
+}
+
+div.progress-bar {
+  height: 18px;
+  position: relative;
+
+  > .background {
+    width: 100%;
+    background: #E2E4E7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  > .selected {
+    background: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+
+    transition: width .3s ease;
+  }
+
+  .overlay {
+    mix-blend-mode: screen;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $roomp-color;
+  }
+
+  span {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    mix-blend-mode: difference;
+  }
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 250;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  > div {
+    max-height: 80%;
+    min-height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .new-hotel {
+    padding: 20px;
+    background: white;
+    position: relative;
+    width: 400px;
+    min-height: 0;
+    border-radius: 8px;
+
+    h3 {
+      font-weight: lighter;
+      color: black;
+      line-height: 20px;
+      text-align: center;
+      margin: 0 -20px 10px;
+      padding-bottom: 10px;
+      width: calc(100% + 40px);
+      border-bottom: 1px solid #E2E4E7;
+    }
+
+    .v-input, .v-select {
+      width: 100%;
+      float: left;
+      height: 30px;
+      line-height: 30px;
+      margin-bottom: 10px;
+      position: relative;
+
+      > *:not(i) {
+        width: 50%;
+        float: left;
+        position: relative;
+      }
+
+      i {
+        top: 0;
+        right: 6px;
+      }
+
+      input {
+        padding-left: 4px;
+      }
+
+      input, select {
+        border: 1px solid $admin-color;
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+
+    > button {
+      @include common_button;
+
+      line-height: 30px;
+      width: 120px;
+      float: left;
+    }
+  }
+
+  .room {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 500px;
+    z-index: 252;
+    position: relative;
+    min-height: 0;
+
+    h3 {
+      padding: 0;
+      font-weight: lighter;
+      font-size: 16px;
+      margin: 0;
+      height: 30px;
+      line-height: 30px;
+    }
+
+    span {
+      line-height: 30px;
+    }
+
+    .basic-info {
+      padding: 0 0 10px 0;
+      margin: 0;
+
+      label {
+        float: left;
+        width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+
+        input {
+          width: 250px;
+        }
+      }
+    }
+
+    .select {
+      .btn-container {
+        padding: 10px 0 20px 0;
+
+        button {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .header {
+      padding-bottom: 20px;
+    }
+
+    .controls {
+      border-top: 1px solid #E2E4E7;
+      margin-top: 10px;
+      padding-top: 20px;
+
+      button {
+        min-width: 120px;
+        height: 40px;
+        margin-right: 20px;
+
+        &.apply {
+          @include ghost_button;
+
+          &:active, &:hover {
+            background: lighten($roomp-color, 60);
+          }
+        }
+
+        &.delete {
+          @include common_button;
+
+          background: red;
+          border: red;
+
+          &:hover, &:active {
+            background: darken(red, 10);
+            border: darken(red, 10);
+          }
+        }
+      }
+    }
+
+  }
+
+  .organization-selector {
+    position: relative;
+    z-index: 251;
+    width: 400px;
+    height: auto;
+    background: white;
+    padding: 20px 0;
+
+    input {
+      width: calc(100% - 40px);
+      margin: 0 20px;
+      line-height: 30px;
+      padding: 0 3px;
+      height: 30px;
+    }
+
+    > div {
+      text-align: center;
+      width: 100%;
+      height: 200px;
+      line-height: 200px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 10px;
+
+      th {
+        text-align: left;
+        padding: 10px 20px;
+      }
+
+      tr:hover td {
+        background: #eaeaea;
+      }
+
+      td {
+        cursor: pointer;
+        padding: 10px 20px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        border-top: 1px solid #eaeaea;
+      }
+    }
+  }
+}
+
+main {
+  width: 768px;
+  margin-left: calc(50% - 768px / 2);
+
+  > .content {
+    position: relative;
+    float: left;
+    width: 100%;
+    min-height: calc(100vh - #{$admin-header-height});
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: $admin-color;
+    z-index: 199;
+    margin-top: $admin-header-height;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.bd {
+  width: 100%;
+  background-color: white;
+  min-height: calc(100vh - 80px);
+  margin: 0 auto;
+
+  nav.stages {
+    display: flex;
+    border-bottom: 1px solid #E2E4E7;
+    width: 720px;
+    height: 50px;
+    align-items: center;
+    margin: 0 24px;
+    position: fixed;
+    background: white;
+    z-index: 200;
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-left: 35px;
+      color: $roomp-color;
+
+      &.router-link-active {
+        font-weight: bold;
+      }
+    }
+  }
+
+  div.hotels-list {
+    position: relative;
+    float: left;
+    margin-top: 50px;
+
+    .hotels {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 12px;
+
+      .hotel {
+        width: 224px;
+        height: 250px;
+        border-radius: 9px;
+        border: 1px solid #E2E4E7;
+        margin: 12px;
+        cursor: pointer;
+        color: black;
+        text-decoration: none;
+        display: block;
+        float: left;
+
+        &.add-hotel {
+          display: flex;
+          padding: 0;
+          text-align: center;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 120px;
+          background: white;
+          color: #E2E4E7;
+          cursor: pointer;
+        }
+
+        > * {
+          display: block;
+          float: left;
+          width: 100%;
+        }
+
+        h4 {
+          height: 50px;
+          line-height: 50px;
+          text-align: center;
+          border-bottom: 1px solid #E2E4E7;
+          width: 100%;
+          margin: 0;
+          padding: 0 20px;
+          font-weight: bold;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        p {
+          font-size: 12px;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 20px;
+          line-height: 20px;
+          padding: 0 20px;
+          margin: 20px 0 0 0;
+
+          i {
+            width: 20px;
+            float: left;
+            line-height: 20px;
+          }
+        }
+        /*.success {
+          background: #00ff99;
+        }*/
+
+        .progress-bar {
+          padding: 0;
+          margin: 30px 40px;
+          width: calc(100% - 80px);
+        }
+
+      }
+    }
+  }
+
+  > .hotel {
+    width: 100%;
+    height: 100%;
+    float: left;
+    position: relative;
+
+    > .spinner {
+      height: calc(100vh - 80px);
+      width: 100%;
+      font-size: 48px;
+      float: left;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #304090;
+    }
+
+    > .hotel-offer {
+      width: 100%;
+      background-color: white;
+      min-height: 800px;
+      margin: 0 auto;
+      padding: 20px 64px;
+
+      &.status-selector {
+        > button {
+          float: left;
+          line-height: 30px;
+          width: 150px;
+
+          @include common_button;
+        }
+      }
+
+      > * {
+        float: left;
+      }
+
+      h3 {
+        height: 60px;
+        font-weight: bold;
+        color: #304090;
+        line-height: 60px;
+        margin: 0;
+
+        width: 100%;
+        padding: 0 20px;
+        border-bottom: 1px solid #E2E4E7;
+      }
+
+      > nav {
+        height: 50px;
+        padding: 0;
+        margin: 0;
+        width: 640px;
+        display: block;
+        color: #304090;
+        position: fixed;
+        bottom: 0;
+        z-index: 200;
+        background: white;
+
+        > button {
+          @include normal_button;
+          margin: 0;
+          height: 50px;
+          line-height: 50px;
+
+          &.apply {
+            @include common_button;
+            float: left;
+            width: 150px;
+
+            font-size: 16px;
+
+            &[disabled] {
+              background: gray;
+              color: white;
+              cursor: default;
+
+              &:hover, &:active {
+                background: gray;
+              }
+            }
+          }
+        }
+
+        .progress-bar {
+          float: left;
+          margin: 16px 0;
+          margin-right: 20px;
+          height: 18px;
+          width: calc(100% - 170px);
+          cursor: pointer;
+        }
+      }
+
+      form {
+        border: 1px solid #E2E4E7;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        position: relative;
+        width: 100%;
+
+        .v-input, .v-select, .ceo-input {
+          margin: 0;
+          width: 100%;
+          height: 60px;
+          padding: 15px;
+          border-bottom: 1px solid #E2E4E7;
+
+          &:last-child {
+            border: none;
+          }
+
+          span {
+            width: 40%;
+            float: left;
+            display: block;
+            line-height: 30px;
+          }
+
+          p, input, select {
+            width: 60%;
+            border: none;
+            background-color: white;
+            outline-width: 0;
+            line-height: 30px;
+            float: left;
+            display:block;
+            margin: 0;
+          }
+
+          p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          input:focus {
+            background-color: white;
+          }
+
+          select {
+            border: none;
+            background-color: white;
+            outline-width: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 1px;
+            text-overflow: '';
+          }
+          select::-ms-expand {
+            display: none;
+          }
+        }
+
+        .v-select {
+
+        }
+
+        .ceo-input {
+          input {
+            width: calc(30% - 6px);
+
+            &:first-of-type {
+              margin-right: 12px;
+              border-right: 1px solid #E2E4E7;
+            }
+          }
+
+          i:first-of-type {
+            right: calc(30% + 20px);
+          }
+        }
+
+        /*> button {
+          @include normal_button;
+
+          width: 100%;
+          height: 65px;
+          cursor: pointer;
+          padding: 0;
+          color: #304090;
+          text-align: center;
+          vertical-align: middle;
+          font-weight: bold;
+          font-size: 16px;
+        }*/
+
+        &.organization {
+          div.selector {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            border: none;
+
+            button {
+              display: block;
+              float: left;
+              width: 180px;
+              line-height: 28px;
+              border: 1px solid $roomp-color;;
+              cursor: pointer;
+              padding: 0;
+              outline: none;
+              background-color: $roomp-color;
+              color: white;
+              border-radius: 4px;
+
+              &:hover {
+                background-color: darken($roomp-color, 10);
+                border-color: darken($roomp-color, 20);
+              }
+            }
+          }
+        }
+
+        &.hotelier {
+          > button {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: block;
+            float: left;
+            width: 180px;
+            line-height: 28px;
+            border: 1px solid $roomp-color;;
+            cursor: pointer;
+            padding: 0;
+            outline: none;
+            background-color: $roomp-color;
+            color: white;
+            border-radius: 4px;
+
+            &:hover {
+              background-color: darken($roomp-color, 10);
+              border-color: darken($roomp-color, 20);
+            }
+          }
+        }
+      }
+
+      .rooms {
+        width: 100%;
+        float: left;
+        border: 1px solid #E2E4E7;
+        border-radius: 10px;
+        margin-bottom: 70px;
+
+        .room-list {
+          width: 100%;
+
+          h3 {
+            width: 100%;
+            padding: 0 20px;
+            border-bottom: 1px solid #E2E4E7;
+            color: $roomp-color;
+            font-weight: bold;
+          }
+
+          table {
+            width: 100%;
+
+            tr {
+              width: 100%;
+              cursor: pointer;
+
+              th {
+                font-weight: lighter;
+                color: $admin-font-color;
+              }
+
+              td, th {
+                text-align: left;
+                height: 60px;
+                padding: 20px;
+                border-bottom: 1px solid #E2E4E7;
+              }
+
+            }
+          }
+        }
+
+        > button {
+          background: none;
+          border: none;
+          outline: none;
+
+          width: 100%;
+          height: 60px;
+          cursor: pointer;
+          color: grey;
+          text-align: center;
+          line-height: 60px;
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+
+      .offer {
+        height: 60px;
+        background-color: #304090;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 20px;
+        width: 768px;
+        bottom: 0;
+        margin-left: -64px;
+        // position: relative;
+        float: left;
+        cursor: pointer;
+      }
+    }
+
+    > .offer-status {
+      width: 100%;
+      border: 1px solid $bd-color;
+      border-radius: 10px;
+      position: relative;
+      float: left;
+      color: $roomp-color;
+      margin-top: 20px;
+
+      > * {
+        display: block;
+        float: left;
+        width: 100%;
+      }
+
+      h2 {
+        line-height: 80px;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        border-bottom: 1px solid $bd-color;
+      }
+
+      > .offer-state {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        font-size: 16px;
+
+        h4 {
+          margin: 0 0 10px 0;
+          padding: 0;
+          font-size: inherit;
+          color: black;
+          font-weight: 400;
+        }
+
+        p {
+          margin: 5px 0;
+          padding: 0;
+        }
+      }
+
+      > .controls {
+        border-top: 1px solid $bd-color;
+
+        button, a {
+          width: 50%;
+          float: left;
+          border: none;
+          background: none;
+          font-size: 18px;
+          color: inherit;
+          line-height: 80px;
+          text-align: center;
+          text-decoration: none;
+
+          &:not(:first-child) {
+            border-left: 1px solid $bd-color;
+          }
+
+          &.hide-offer {
+            width: 100%;
+          }
+        }
+      }
+
+      > iframe {
+        float: left;
+        width: 100%;
+        height: calc(100vh - 185px);
+      }
+    }
+  }
+}
+
+
+
+
+
+
+

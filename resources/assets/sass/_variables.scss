@@ -1,0 +1,66 @@
+
+$roomp-color: #304090;
+$roomp-color-hover: #24306d;
+$booking-color: #727272;
+$booking-alternate: #ededed;
+$grey: #ededed;
+$booking-width: 420px;
+$margin: 20px;
+$roomp-header-height: 60px;
+
+@mixin image_overlay {
+  &:before {
+    content: ' ';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+@mixin normal_button {
+  background: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin ghost_button {
+  border: 1px solid $roomp-color;
+  background: white;
+  color: $roomp-color;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin common_button {
+  border: none;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  background: $roomp-color;
+
+  &:hover {
+    background: $roomp-color-hover;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &::-moz-placeholder          {@content}
+  &:-moz-placeholder           {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+a[target=_blank] {
+  target-name: new;
+  target-new: tab;
+}
+
+@function cdn($path) {
+  @return "url('" + $cdn + $path + "')";
+}

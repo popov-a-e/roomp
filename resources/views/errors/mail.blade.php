@@ -1,0 +1,3 @@
+{{ $message }}
+<br />
+{{ $trace }}

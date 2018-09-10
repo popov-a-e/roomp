@@ -1,0 +1,159 @@
+@import '../../_variables';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  max-width: 800px;
+  padding: 0 20px 20px 20px;
+
+  .content {
+    width: 100%;
+    float: left;
+    position: relative;
+
+    a.logo {
+      width: 200px;
+      height: 50px;
+      background: #{cdn('/img/logo.png')};
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 20px auto;
+      position: relative;
+      display: block;
+    }
+
+    div.status {
+      font-size: 24px;
+      color: $roomp-color;
+      text-transform: uppercase;
+    }
+
+    div.photo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 100%;
+      padding: 20px 0;
+
+      div {
+        height: 225px;
+        width: 440px;
+        background-size: cover;
+      }
+    }
+
+    div.info {
+      p {
+        line-height: 14px;
+        font-size: 14px;
+        margin: 0 0 12px 0;
+        padding: 0;
+      }
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: 18px;
+      color: #304090;
+      text-transform: uppercase;
+    }
+
+    div.controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width:100%;
+
+      button, a {
+        @include ghost_button;
+        height: 50px;
+        cursor: pointer;
+        padding: 0 40px;
+        text-decoration: none;
+        line-height: 50px;
+        font-size: 12px;
+        color: $roomp-color;
+
+        &.pay {
+          margin-left: 20px;
+
+          @include common_button;
+        }
+      }
+    }
+
+    div.occupancies {
+      float: left;
+      width: 100%;
+
+      .occupancy, .total, .discount {
+        div:first-child {
+          flex: 1;
+        }
+
+        div:last-child {
+          white-space: nowrap;
+        }
+      }
+
+      .occupancy {
+        float: left;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+      }
+
+      .total {
+        float: left;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        padding: 10px 0;
+        border-top: 1px solid $booking-alternate;
+        border-bottom: 1px solid $booking-alternate;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .discount {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 0 0;
+        padding: 10px 0 0 0;
+        border-top: 1px solid $booking-alternate;
+        font-size: 16px;
+        font-weight: 400;
+        float: left;
+      }
+    }
+
+    div.additional {
+      p {
+        line-height: 14px;
+        font-size: 14px;
+        margin: 0 0 12px 0;
+        padding: 0;
+      }
+    }
+  }
+}

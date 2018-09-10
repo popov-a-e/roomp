@@ -1,0 +1,179 @@
+@import './_variables';
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+main {
+  position: absolute;
+  left: 50%;
+  width: 800px;
+  margin-left: -400px;
+  height: 100vh;
+
+  header {
+    width: 100%;
+    position: fixed;
+    display: block;
+    height: 60px;
+    background: white;
+    z-index: 100;
+    left: 0;
+
+    a.logo {
+      width: 200px;
+      height: 100%;
+      float: left;
+      background: #{cdn('/img/logo.png')} center 60% no-repeat;
+      background-size: 50%;
+    }
+
+    > div {
+      float: right;
+      width: 190px;
+      padding: 15px 20px;
+
+      select {
+        width: 150px;
+        height: 30px;
+        line-height: 30px;
+
+      }
+    }
+
+    a.logout {
+      text-decoration: none;
+      float: right;
+      line-height: 60px;
+      width: 150px;
+      text-align: center;
+      display: block;
+      border-left: 1px solid #eaeaea;
+    }
+  }
+
+  > * {
+    display: block;
+    float: left;
+  }
+
+  iframe {
+    width: 100%;
+    margin-top: 60px;
+    height: calc(100vh - 150px);
+  }
+
+  form {
+    height: 90px;
+    padding: 20px 0;
+    width: 100%;
+
+    label {
+      display: block;
+      float: left;
+      line-height: 50px;
+      cursor: default;
+    }
+
+    button {
+      @include common_button;
+      float: right;
+      width: 150px;
+
+      font-size: 16px;
+      line-height: 50px;
+
+      &[disabled] {
+        background: gray;
+        color: white;
+        cursor: default;
+
+        &:hover, &:active {
+          background: gray;
+        }
+      }
+    }
+  }
+
+  .modal {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 250;
+
+    &[v-if] {
+      display: none;
+    }
+
+    &:before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    > div {
+      background: white;
+      width: 500px;
+      height: auto;
+      padding: 20px;
+      z-index: 251;
+      position: relative;
+
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      p {
+        font-size: 16px;
+        margin: 0 0 10px 0;
+      }
+
+      span {
+        font-size: 14px;
+        color: red;
+      }
+
+      a {
+        @include common_button;
+
+        line-height: 30px;
+        position: relative;
+        width: 180px;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+
+        margin: 10px auto 0;
+      }
+    }
+  }
+
+  > div.content {
+    margin-top: $roomp-header-height;
+
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    li p {
+      margin: 0;
+    }
+  }
+}

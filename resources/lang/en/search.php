@@ -1,0 +1,35 @@
+<?php
+
+return [
+  'type' => 'Accommodation',
+  'sort_by' => 'Sort By...',
+  'filters' => 'Filters',
+  'price' => 'Price',
+  'apply' => 'Apply',
+  'reset' => 'Reset',
+  'cancel' => 'Cancel',
+  'city' => 'City',
+  'rooms' => 'Number of rooms',
+  'guest' => 'Number of guests',
+  'more_filters' => 'More filters',
+  'reset_filters' => 'Reset filters',
+  'back_to_results' => 'Back to the results',
+  'sort' => [
+    'price_low' => 'Cheap first',
+    'price_high' => 'Expensive first',
+    'center' => 'Closer to the center',
+  ],
+  'soldout' => 'Sold out',
+  'search_by_map' => 'Search as I move the Map',
+  'payment_method' => 'Payment Method',
+  'hotel_amenities' => 'Facilities',
+  'room_amenities' => 'Amenities',
+  'payment_online' => 'Online',
+  'payment_by_card' => 'Card at the Hotel',
+  'payment_by_cash' => 'Cash at the Hotel',
+  'hotels_not_found' => 'No Roomp hotels found',
+  'hotels_found' => ['Found * Roomp Hotels', 'Found * Roomp Hotels', 'Found * Roomp Hotels', '* Roomp hotel found'],
+  'not_found' => 'Sorry, we failed to find any hotels that matched your criteria.<br> This might help:',
+  'reset_map' => 'Reset map',
+  'reset_prices' => 'Reset prices'
+];

@@ -1,0 +1,219 @@
+@import './_variables';
+
+.booking-page {
+  width: 1080px;
+  margin: 0 auto;
+
+
+  h2 {
+    font-size: 20px;
+    color: $roomp-color;
+    height: 70px;
+    line-height: 70px;
+    margin: 0;
+
+    @include noprint;
+  }
+
+  .date_filter {
+    background-color: white;
+    border-radius: 5px;
+    height: 110px;
+
+    @include noprint;
+
+    h5 {
+      border-bottom: 1px solid #D8D8D8;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 400;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    select {
+      float: left;
+      position: relative;
+      margin: 0 20px;
+      display: block;
+      height: 30px;
+      border-radius: 3px;
+      padding-right: 10px;
+    }
+    .dates {
+      float: left;
+      position: relative;
+      display: block;
+      height: 30px;
+      line-height: 30px;
+
+      > a {
+        text-decoration: none;
+        color: $roomp-color;
+        float: left;
+      }
+
+      i.icon-arrow {
+        margin: 0 10px;
+        color: grey;
+        line-height: 35px;
+        display: block;
+      }
+    }
+  }
+
+  table {
+    margin-top: 20px;
+    background-color: white;
+    width: 100%;
+    border-radius: 3px;
+    margin-bottom: 20px;
+
+    tr {
+      vertical-align: middle;
+      height: 60px;
+
+      &:not(:first-child):not(.empty) {
+        cursor: pointer;
+
+        &:hover {
+          background-color: #DCF1FA;
+        }
+      }
+
+      &.empty {
+        height: 300px;
+        color: rgb(33, 33, 33);
+        font-size: 14px;
+        opacity: 0.7;
+      }
+
+
+      > td {
+        border-top: 1px solid #D8D8D8;
+        font-size: 14px;
+      }
+
+      > th {
+
+        > div {
+          display: flex;
+
+        }
+
+        input {
+          border: none;
+          font-size: 15px;
+          width: 100%;
+        }
+
+        .filter {
+
+          button {
+            -webkit-appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background: none;
+
+            i {
+              font-size: 10px;
+            }
+          }
+          .inactive {
+            display: block;
+          }
+        }
+        .filter_select {
+
+          height: 100%;
+          position: relative;
+          float: left;
+          padding: 10px;
+          display: flex;
+
+          input {
+            width: calc(100% - 20px);
+            line-height: inherit;
+            overflow: hidden;
+            float: left;
+            display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            height: 100%;
+            border: none;
+          }
+          .menu {
+            position: absolute;
+            width: 100%;
+            top: 100%;
+            left: 0;
+            z-index: 100;
+            border: 1px solid #ededed;
+
+            a {
+              float: left;
+              line-height: inherit;
+              width: 100%;
+              display: block;
+              text-decoration: none;
+              color: inherit;
+              font-weight: 400;
+              padding: 5px 10px;
+              font-size: 14px;
+              background: white;
+              border-bottom: 1px solid #ededed;
+            }
+            .selected {
+              font-weight: 600;
+            }
+          }
+          button {
+            background: none;
+            -webkit-appearance: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            float: right;
+          }
+        }
+      }
+
+      th, td {
+        &.status {
+          width: 153px;
+        }
+      }
+
+
+      td {
+        div.status {
+          color: white;
+          margin-right: 10px;
+          text-align: center;
+          height: 35px;
+          line-height: 35px;
+          border-radius: 5px;
+
+          &.fulfilled {
+            background-color: #088108;
+          }
+
+          &.booked, &.paid, &.reserved, &.reserved_online {
+            background-color: #59CA59;
+          }
+
+          &.cancelled, &.cancelled_online, &.not_confirmed, &.not_confirmed_online  {
+            background-color: #A10909;
+          }
+
+          &.missed {
+            background: #aaa;
+          }
+        }
+      }
+    }
+  }
+}

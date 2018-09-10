@@ -1,0 +1,380 @@
+@import './_variables';
+
+$h2-height: 60px;
+$filter-height-with-margin: 60px;
+
+.dashboard-page .cell {
+  width: 50px;
+  text-align: center;
+  height: 25px;
+  color: #304090;
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  display: block;
+  float: left;
+
+  margin-bottom: 2px;
+  margin-right: 2px;
+
+  &.boolean {
+    background-color: #2ab27b;
+  }
+
+  &.closed {
+    background-color: #d43f3a;
+  }
+
+  &.soldout {
+    background-color: #f9da86;
+  }
+
+  &.undefined {
+    background: #ededed;
+  }
+
+  &.active {
+    background-color: #66afe9;
+  }
+}
+
+.dashboard-page {
+  width: calc(100% - 40px);
+  margin: 0 auto;
+
+  .changes-saved-popup {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    border-radius: 4px;
+    height: 80px;
+    padding: 20px;
+    line-height: 20px;
+    width: 300px;
+    background: white;
+    box-shadow: 3px 3px 5px -3px black;
+    border: 1px solid #ccc;
+    opacity: 0;
+    transition: opacity .5s ease-in;
+
+    i {
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: gray;
+    }
+  }
+
+  h2 {
+    color: $roomp-color;
+    height: $h2-height;
+    line-height: $h2-height;
+    font-size: 20px;
+    margin: 0;
+    float: left;
+    display: block;
+  }
+
+  div.dashboard-legend {
+    float: right;
+    width: auto;
+    height: 30px;
+    margin-top: 23px;
+    margin-right: 20px;
+
+    > div {
+      float: left;
+      display: block;
+      margin-right: 20px;
+
+      > * {
+        float: left;
+        height: 25px;
+        line-height: 25px;
+        display: block;
+      }
+
+      span {
+        padding-left: 10px;
+        color: #000;
+      }
+    }
+  }
+
+  .filter {
+    background-color: white;
+    border-radius: 4px;
+    float: left;
+    display: block;
+    width: 100%;
+
+    > * {
+      float: left;
+      display: block;
+    }
+
+    h3 {
+      height: 40px;
+      line-height: 40px;
+      border-right: 1px solid #ededed;
+      padding: 0 20px;
+      margin: 0;
+      font-size: 16px;
+      font-weight: normal;
+      width: auto;
+      float: left;
+      display: block;
+    }
+
+    > div {
+      height: 40px;
+      line-height: 40px;
+      padding-left: 20px;
+      float: left;
+      display: block;
+
+      .dates {
+        position: relative;
+        float: left;
+
+        a {
+          text-decoration: none;
+          color: $roomp-color;
+
+          i {
+            color: grey;
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .dashboard {
+    background-color: white;
+    margin-top: 20px;
+    padding: 20px 0;
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+    max-height: calc(100vh - #{70px + 60px + 60px + 20px});
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    float: left;
+
+    div {
+      float: left;
+      position: relative;
+    }
+
+    .categories-header {
+      border-bottom: 1px solid #ededed;
+      border-right: 1px solid #ededed;
+      padding-bottom: 10px;
+      padding-top: 20px;
+      margin-left: 1px;
+      width: 180px;
+
+      > :first-child {
+        padding-left: 20px;
+        width: 50px;
+      }
+    }
+
+    .dashboard-header {
+      width: calc(100% - 200px);
+      overflow: hidden;
+    }
+
+    .dates {
+      border-bottom: 1px solid #ededed;
+      height: 34px + 20px;
+      display: block;
+      padding-left: 10px;
+
+      .month {
+        float: left;
+        display: block;
+        height: 20px;
+        line-height: 20px;
+        text-align: left;
+        padding-left: 20px;
+        font-size: 12px;
+      }
+
+      .month + .day {
+        clear: left;
+      }
+
+      .day {
+        width: 50px;
+        text-align: center;
+        margin-right: 2px;
+        display: block;
+        float: left;
+
+        p {
+          font-size: 12px;
+          line-height: 16px;
+          padding: 0;
+          margin: 0;
+          color: #5F5F5F;
+
+          &:last-of-type {
+            font-weight: bold;
+          }
+        }
+
+        &.weekend p {
+          color: black;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .dashboard-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      //max-height: calc(100vh - 305px);
+      overflow-y: auto;
+
+      .dashboard-wrapper-content {
+        float: left;
+        position: relative;
+        width: calc(100% - 180px);
+        overflow: auto;
+        max-height: calc(100vh - 305px);
+      }
+
+      .categories-wrapper {
+        width: 180px;
+        max-height: calc(100vh - 305px);
+        overflow-y: hidden;
+
+        .categories {
+          width: 180px;
+
+          .category {
+            font-size: 14px;
+
+            .category-header {
+              display: flex;
+              font-size: 16px;
+              color: #304090;
+              font-weight: bold;
+              padding-top: 10px;
+
+              div {
+                height: 25px;
+                margin-bottom: 2px;
+                line-height: 25px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &:first-child {
+                  width: 50px;
+                  text-align: right;
+                  padding-right: 5px;
+                }
+
+                &:last-child {
+                  width: 130px;
+                }
+              }
+            }
+
+            .occupancy {
+              padding-left: 50px;
+              margin-bottom: 5px;
+              width: 100%;
+
+              > :first-child {
+                width: 100%;
+                //display: flex;
+                //justify-content: space-between;
+
+                > div {
+                  float: left;
+                }
+
+                i {
+                  float: right;
+                  padding-right: 5px;
+                  font-size: 10px;
+                  font-weight: bold;
+                  cursor: pointer;
+                }
+              }
+
+              .guest-number {
+                padding-left: 20px;
+                clear: both;
+              }
+
+              .min-stay {
+
+              }
+
+              div {
+                height: 25px;
+                margin-bottom: 2px;
+                line-height: 25px;
+                clear: both;
+              }
+            }
+
+          }
+        }
+      }
+    }
+
+    .dashboard-content {
+      width: auto;
+      font-size: 14px;
+
+      .category-inner {
+        clear: both;
+        border-left: 1px solid #ededed;
+
+        .availability {
+          display: block;
+          padding-left: 10px;
+          padding-top: 10px;
+
+          .availability-cell {
+            width: 50px;
+            text-align: center;
+            height: 25px;
+            color: #304090;
+            border: 1px solid #ededed;
+            border-radius: 3px;
+            display: block;
+            float: left;
+
+            margin-bottom: 2px;
+            margin-right: 2px;
+
+          }
+
+        }
+
+        .rates-inner {
+          padding-left: 10px;
+          margin-bottom: 5px;
+
+          > div > div {
+            display: block;
+            float: left;
+          }
+
+        }
+      }
+
+    }
+  }
+}

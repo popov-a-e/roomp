@@ -1,0 +1,162 @@
+@import './_variables';
+
+.booking-confirmation {
+  width: 1080px;
+  margin: 0 auto 20px;
+
+  h2 {
+    font-size: 20px;
+    color: $roomp-color;
+    height: 70px;
+    line-height: 70px;
+    margin: 0;
+  }
+
+  .date_filter {
+    background-color: white;
+    border-radius: 5px;
+    height: 110px;
+
+    @include noprint;
+
+    h5 {
+      border-bottom: 1px solid #D8D8D8;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 400;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    select {
+      float: left;
+      position: relative;
+      margin: 0 20px;
+      display: block;
+      height: 30px;
+      border-radius: 3px;
+      padding-right: 10px;
+    }
+    .dates {
+      float: left;
+      position: relative;
+      display: block;
+      height: 30px;
+      line-height: 30px;
+
+      > a {
+        text-decoration: none;
+        color: $roomp-color;
+        float: left;
+      }
+
+      i.icon-arrow {
+        margin: 0 10px;
+        color: grey;
+        line-height: 35px;
+        display: block;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    border-radius: 3px;
+    margin-top: 20px;
+
+    tr {
+      background: white;
+      height: 60px;
+
+      td {
+        border-top: 1px solid #D8D8D8;
+        font-size: 14px;
+
+        &:first-child {
+          padding-left: 20px;
+        }
+
+        &.noshow {
+          width: 182px;
+
+          &.disabled {
+            button, button:hover {
+              color: gray;
+              border: 1px solid gray;
+              background: white;
+              cursor: default;
+
+              &.selected, &.selected:hover {
+                background-color: gray;
+                color: white;
+              }
+            }
+          }
+        }
+
+        p {
+          margin: 0;
+        }
+
+        div.show-selector {
+          margin: 0 10px 0 0;
+          border: none;
+
+          $hover-color: lighten($roomp-color, 50);
+          $usual-color: lighten($roomp-color, 70);
+          $border-color: $roomp-color;
+
+          button {
+            display: block;
+            float: left;
+            width: 80px;
+            line-height: 28px;
+            background: $usual-color;
+            border: 1px solid $border-color;
+            color: $roomp-color;
+            cursor: pointer;
+            padding: 0;
+            outline: none;
+
+            &:first-child {
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+
+            &:not(:first-child) {
+              border-left: none;
+            }
+
+            &:last-child {
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+
+            &:hover {
+              background-color: $hover-color;
+            }
+
+            &.selected, &.selected:hover {
+              background-color: $roomp-color;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  td > button {
+    line-height: 40px;
+    width: 200px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    background: #304090;
+    margin-right: 20px;
+  }
+
+}

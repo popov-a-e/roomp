@@ -1,0 +1,51 @@
+@import './modules/header';
+@import './modules/footer';
+@import '../components/hotel';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  &.fixed {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+main {
+  width: 100%;
+  position: relative;
+  max-width: 1600px;
+  margin-top: $roomp-header-height;
+
+  padding: 0 20px 20px 20px;
+
+  .content-container {
+    float: left;
+    width: 100%;
+    position: relative;
+
+    @include content;
+
+  }
+
+  .booking-container {
+    width: $booking-width;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: calc(100% - 20px);
+
+    @include booking;
+  }
+}

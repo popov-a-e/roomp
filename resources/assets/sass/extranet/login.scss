@@ -1,0 +1,202 @@
+@import './_variables';
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ededed;
+
+  $header-height: 70px;
+
+  > .header-container {
+    width: 100%;
+    height: $header-height;
+    display: block;
+    float: left;
+    background: white;
+    flex: 0 1 $header-height;
+
+    header {
+      width: 1440px;
+      margin: 0 auto;
+      height: $header-height;
+      display: block;
+
+      @include noprint;
+
+      img {
+        height: 30px;
+        margin: ($header-height - 30px) / 2;
+        float: left;
+      }
+
+    }
+  }
+
+  > .content {
+    flex: 1;
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+
+    > div.login {
+      background: white;
+      width: 500px;
+
+      h1 {
+        width: 100%;
+        line-height: 90px;
+        border-bottom: 1px solid $grey;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        float: left;
+        display: block;
+        color: $roomp-color;
+      }
+
+      > div {
+        padding: 40px 60px 60px 60px;
+
+        &, > * {
+          float: left;
+          clear: both;
+          display: block;
+          width: 100%;
+        }
+
+        > label {
+          &, > * {
+            float: left;
+            clear: both;
+            display: block;
+            width: 100%;
+          }
+
+          > span.type {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            font-size: 16px;
+          }
+
+          > input {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #D8D8D8;
+            border-radius: 3px;
+            text-align: center;
+          }
+
+          > span.errors {
+            color: red;
+            text-align: center;
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            font-size: 14px;
+          }
+        }
+        > button {
+          @include common_button;
+          width: 100%;
+          line-height: 50px;
+          height: 50px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+/*
+
+.login {
+  width: 450px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+
+  h4 {
+    border-bottom: 1px solid $grey;
+    height: 90px;
+    font-weight: bold;
+    color: $roomp-color;
+    line-height: 90px;
+    text-align: center;
+    margin: 0px 0px;
+    font-size: 20px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    padding: 0px 60px;
+
+    span {
+      color: $roomp-color;
+    }
+
+    input {
+      border: 1px solid $grey;
+      height: 50px;
+      margin-top: 25px;
+      text-align: center;
+      border-radius: 3px;
+    }
+
+    .error {
+      color: red;
+    }
+  }
+
+  button {
+    width: 240px;
+    height: 50px;
+    background-color: $roomp-color;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 3px;
+    border-style: none;
+    cursor: pointer;
+  }
+  .reset-password {
+    margin: 0 auto;
+    color: $roomp-color;
+    cursor: pointer;
+
+  }
+}
+
+*/

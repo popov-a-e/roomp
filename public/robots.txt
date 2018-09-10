@@ -1,2 +1,16 @@
 User-agent: *
-Disallow:
+Allow: /
+Allow: /hotel
+Allow: /search
+Disallow: /r
+Disallow: /lang
+Disallow: /hotels
+Disallow: /rooms
+Disallow: /hotel_rooms
+Disallow: /promo
+Disallow: /book
+Disallow: /pay
+Disallow: /auth
+Disallow: /profile
+Host: https://roomp.co
+sitemap: https://roomp.co/sitemap.xml

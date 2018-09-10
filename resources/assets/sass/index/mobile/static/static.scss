@@ -1,0 +1,56 @@
+@import '../modules/header';
+
+* {
+  box-sizing: border-box;
+  font-family: "GT Walsheim", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  float: left;
+  padding: $header-height $margin-small $margin-small;
+
+  .content {
+    width: 100%;
+    position: relative;
+
+    margin: 0;
+    padding-bottom: 20px;
+
+    h1, h2 {
+      text-align: center;
+      text-transform: uppercase;
+      width: 100%;
+      float: left;
+      position: relative;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 36px;
+      padding: 0;
+      color: $roomp-color;
+      margin: 0 0 20px 0;
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 20px;
+      margin: 20px 0 10px 0;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    ul, ol, li {
+      float: left;
+    }
+  }
+}
