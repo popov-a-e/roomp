@@ -1,9 +1,8 @@
 {
-  "name": "laravel/laravel",
-  "description": "The Laravel Framework.",
+  "name": "popov-a-e/roomp",
+  "description": "Roomp",
   "keywords": [
-    "framework",
-    "laravel"
+    "roomp"
   ],
   "license": "MIT",
   "type": "project",

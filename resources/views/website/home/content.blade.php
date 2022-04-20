@@ -26,6 +26,7 @@
     <div class="conveniences">
       <h3>{{__('home.icon_title')}}</h3>
       <div class="conveniences-container">
+
         <div>
           <i class="icon-bed"></i>
           <p>{{__('home.icon_bed')}}</p>
